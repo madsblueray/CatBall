@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ball
+  - Target
+  - Launcher
+  - TargetManager
+  - Level
+  - Particle
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Projectiles
+  - Water
+  - UI
+  - Targets
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3843452357
+    locked: 0
+  - name: Particle
+    uniqueID: 3250859885
+    locked: 0
+  - name: Object
+    uniqueID: 1217298721
+    locked: 0
+  - name: Text
+    uniqueID: 1309527619
+    locked: 0

@@ -1,0 +1,4 @@
+repository "mobile_game_1@madsblueray@cloud"
+  path "/"
+    smartbranch "/main"       
+     
