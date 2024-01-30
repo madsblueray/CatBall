@@ -19,6 +19,7 @@ public class WinConditionManager : MonoBehaviour
     void Start()
     {
         LevelLoader.OnLevelChange += EndOfLevelCleanup;
+        TargetEventHandler.allTargetsDisabled += Win;
         //TargetEventHandler.onAllObjectsDisabled += Win;
     }
 

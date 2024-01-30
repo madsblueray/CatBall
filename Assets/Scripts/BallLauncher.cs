@@ -48,18 +48,13 @@ public class BallLauncher : MonoBehaviour
     }
 
     void OnMouseUp() {
-        rb2d.constraints = RigidbodyConstraints2D.None;
         launchVector = Path.dir - new Vector2(transform.position.x, transform.position.y);
         launchVector.Scale(new Vector2(10f, 10f));
-        this.GetComponent<SpriteRenderer>().enabled = false;
-        this.GetComponent<CircleCollider2D>().enabled = false;
         Path.Reset();
-
         //BallLaunched.Invoke(LevelLoader.currentLevel);
         BallLaunchedStatic.Invoke(LevelLoader.currentLevel);
-    
+        GetComponent<SpriteRenderer>().enabled = false;
         StartCoroutine(LaunchCopy());
-
     }
 
     IEnumerator LaunchCopy()
@@ -76,6 +71,7 @@ public class BallLauncher : MonoBehaviour
                 yield return new WaitForSeconds(myDelay);
             }
         }
+        gameObject.SetActive(false);
     }
 
     public void disableLaunch()

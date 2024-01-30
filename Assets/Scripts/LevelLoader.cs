@@ -29,12 +29,9 @@ public class LevelLoader : MonoBehaviour
     }
     void Start()
     {
-        transform.name = transform.name.Replace("(Clone)","").Trim();
         currentLevel = startingLevel;
         GenerateLevelsList();
         LoadLevel(currentLevel);
-
-        WinConditionManager.lossEvent += ResetLevel;
     }
     public void LoadLevel(int levelIndex)
     {
@@ -42,11 +39,8 @@ public class LevelLoader : MonoBehaviour
         //hook up UI to that level's components
         currentLevel = levelIndex;
         OnLevelChange.Invoke(levelIndex);
-        Debug.Log("NextLevelLoaded and event invoked");
         GameObject level = levels[levelIndex];
-        Debug.Log(level);
         GameObject platform = level.GetComponentInChildren<FollowCursor1D>(true).gameObject;
-        Debug.Log(platform);
         platform.SetActive(true);
     }
 

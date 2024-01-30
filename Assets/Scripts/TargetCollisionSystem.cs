@@ -8,15 +8,17 @@ using UnityEngine.UI;
 public class TargetCollisionSystem : MonoBehaviour
 {
     [SerializeField] 
+    public int index;
     public float shrinkAmt;
     public float rotateAmt;
     public float pushAmt;
-
-    public int HP; private int curHP;
+    public int HP; 
+    private int curHP;
     public TMP_Text text;
     public int anchorPoint = 4;
-    private Vector2[,] anchorPoints = new Vector2[3,3];
-
+    private readonly Vector2[,] anchorPoints = new Vector2[3,3];
+    
+    
 
     /// <summary>
     /// When the following bools are enabled, the initializer function will add
@@ -34,9 +36,8 @@ public class TargetCollisionSystem : MonoBehaviour
     public bool changeBallShapeOnHit;
 
 
-
-
-
+    public delegate void TargetPopped(int index);
+    public event TargetPopped targetPopped;
 
 
     void Start()
@@ -61,12 +62,12 @@ public class TargetCollisionSystem : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D other)
     {
         curHP-=1;
-        if (curHP == 0)
-        {
-            GetComponent<TargetDisabledHandler>().CreateParticles();
-            gameObject.SetActive(false);
-        }
 		playSound();
+
+        if (curHP < 1)
+        {
+            targetPopped.Invoke(index);
+        }
 
         if (shrinkOnHit) Shrink(other);
         if (rotateOnHit) Rotate(other);
@@ -118,5 +119,10 @@ public class TargetCollisionSystem : MonoBehaviour
     {
         Vector2 dir = other.relativeVelocity;
         other.otherCollider.gameObject.transform.localPosition += new Vector3(dir.x, dir.y, 0)*pushAmt;
+    }
+
+    public void ResetHP()
+    {
+        curHP = HP;
     }
 }

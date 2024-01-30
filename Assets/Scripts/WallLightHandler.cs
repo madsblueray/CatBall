@@ -27,7 +27,6 @@ public class WallLightHandler : MonoBehaviour
     {
         foreach (Light2D light in lights)
         {
-            Debug.Log(lights.Length);
             light.enabled = false;
         }
     }
@@ -44,7 +43,6 @@ public class WallLightHandler : MonoBehaviour
     {
         foreach (Light2D light in lights)
         {
-            Debug.Log(lights.Length);
             light.enabled = true;
         }
     }

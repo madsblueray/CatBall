@@ -9,16 +9,14 @@ public class BallManager : MonoBehaviour
     [SerializeField]
     public int ballsDestroyed;
     public int ballsExpected;
-    bool allowWin = false;
 
     LevelProperties lp;
+    BallLauncher ball;
 
     void Start()
     {
         lp = GetComponentInParent<LevelProperties>();
         ProjectileBall.ballDestroyedInLevel += Decrement;
-        TargetEventHandler.onAllObjectsDisabled += filterTargetHandlerWinEvent;
-        BallLauncher.BallLaunchedStatic += updateWinState;
         ballsExpected = gameObject.GetComponentInChildren<BallLauncher>().ballCount;
     }
 
@@ -32,7 +30,6 @@ public class BallManager : MonoBehaviour
         if (currentLevel == lp.levelIndex)
         {
             Decrement();
-            updateWinState();
             checkLose();
             
         }
@@ -56,15 +53,9 @@ public class BallManager : MonoBehaviour
         else 
         {
             WinConditionManager.Lose();
+            ResetBall();
         }
-    }
-
-    void filterTargetHandlerWinEvent()
-    {
-        if (allowWin)
-        {
-            Win();
-        }
+        ballsDestroyed = 0;
     }
 
     void Win()
@@ -73,24 +64,19 @@ public class BallManager : MonoBehaviour
         WinConditionManager.Win();
     }
 
-    void updateWinState(int levelIndex)
-    {
-        if (levelIndex == lp.levelIndex)
-        {
-            updateWinState();
-        }
-    }
-
-    void updateWinState()
-    {
-        allowWin = ballsDestroyed < ballsExpected;
-        Debug.Log("allowWin = " + allowWin);
-    }
-
     void CleanUp()
     {
         ballsDestroyed = 0;
         ballsExpected = 0;
         this.enabled = false;
+    }
+
+    void ResetBall()
+    {
+        ball = GetComponentInChildren<BallLauncher>(true);
+        Debug.Log("ball: " + ball);
+        ball.gameObject.SetActive(true);
+        ball.curballCount = ball.ballCount;
+        ball.GetComponent<SpriteRenderer>().enabled = true;
     }
 }
