@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da90f7957634eb24a9d21365dfa10f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   position: F
   colors:
   - {r: 0.9960785, g: 0.9960785, b: 0.9960785, a: 1}
@@ -1304,7 +1304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da90f7957634eb24a9d21365dfa10f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 0
   position: L
   colors:
   - {r: 0.9960785, g: 0.9960785, b: 0.9960785, a: 1}
@@ -1523,6 +1523,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1821726223227126737, guid: 7420b90f546fc1049b9228a509435621, type: 3}
+      propertyPath: LFO1_amplitude
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821726223227126737, guid: 7420b90f546fc1049b9228a509435621, type: 3}
+      propertyPath: LFO1_timescale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1821726223255877607, guid: 7420b90f546fc1049b9228a509435621, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1534,6 +1542,14 @@ PrefabInstance:
     - target: {fileID: 1821726223255877607, guid: 7420b90f546fc1049b9228a509435621, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821726223965882719, guid: 7420b90f546fc1049b9228a509435621, type: 3}
+      propertyPath: LFO1_amplitude
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821726223965882719, guid: 7420b90f546fc1049b9228a509435621, type: 3}
+      propertyPath: LFO1_timescale
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1821726224052190301, guid: 7420b90f546fc1049b9228a509435621, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1561,11 +1577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1821726224142302441, guid: 7420b90f546fc1049b9228a509435621, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1821726224142302441, guid: 7420b90f546fc1049b9228a509435621, type: 3}
       propertyPath: LFO1_offset
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1821726224142302441, guid: 7420b90f546fc1049b9228a509435621, type: 3}
       propertyPath: OscIntensity
@@ -1630,6 +1646,18 @@ PrefabInstance:
     - target: {fileID: 1821726224509615291, guid: 7420b90f546fc1049b9228a509435621, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821726224509615292, guid: 7420b90f546fc1049b9228a509435621, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821726224566705668, guid: 7420b90f546fc1049b9228a509435621, type: 3}
+      propertyPath: LFO1_amplitude
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821726224566705668, guid: 7420b90f546fc1049b9228a509435621, type: 3}
+      propertyPath: LFO1_timescale
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1821726223174483950, guid: 7420b90f546fc1049b9228a509435621, type: 3}

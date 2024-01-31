@@ -50,27 +50,44 @@ public class WallType : MonoBehaviour
 
     void TeleportBehaviour(Collision2D other)
     {
-        switch (position)
+        other.gameObject.GetComponent<ProjectileBall>().ClearTrail();
+        if (other != null)
         {
-            case "F":
-                Nudge(other.transform, 0f, 15f);
-                break;
-            case "C":
-                Nudge(other.transform, 0f, -15f);
-                break;
-            case "L":
-                Nudge(other.transform, 8f, 0f);
-                break;
-            case "R":
-                Nudge(other.transform, -8f, 16f);
-                break;
-            default:
-                break;
+            switch (position)
+            {
+                case "F":
+                    NudgeY(other,1);
+                    break;
+                case "C":
+                    NudgeY(other,-1);
+                    break;
+                case "L":
+                    NudgeX(other, 1);
+                    break;
+                case "R":
+                    NudgeX(other, -1);
+                    break;
+                default:
+                    break;
+            }
         }
+        other.gameObject.GetComponent<ProjectileBall>().ClearTrail();
     }
 
-    void Nudge(Transform other, float x, float y)
+    void NudgeX(Collision2D other, float x)
     {
-        other.position = new Vector3(other.position.x + x, other.position.y + y, other.position.z);
+        Transform T = other.transform;
+        T.position = new Vector3(4.15f*x, T.position.y, T.position.z);
+        Vector3 V = other.gameObject.GetComponent<Rigidbody2D>().velocity;
+        V = new Vector3(-V.x, V.y, V.z);
+        other.gameObject.GetComponent<Rigidbody2D>().velocity = V;
+    }
+    void NudgeY(Collision2D other, float y)
+    {
+        Transform T = other.transform;
+        T.position = new Vector3(T.position.x, 7.65f*y, T.position.z);
+        Vector3 V = other.gameObject.GetComponent<Rigidbody2D>().velocity;
+        V = new Vector3(V.x, -V.y, V.z);
+        other.gameObject.GetComponent<Rigidbody2D>().velocity = V;
     }
 }
