@@ -9,7 +9,7 @@ using UnityEngine.WSA;
 
 public class WinConditionManager : MonoBehaviour
 {
-    static bool winState = false;
+    public static bool winState = true;
     public delegate void EndOfGameEvent();
     public static event EndOfGameEvent lossEvent;
     public static event EndOfGameEvent winEvent;
@@ -27,20 +27,22 @@ public class WinConditionManager : MonoBehaviour
     {
         winState = true;
         FreezeProjectiles();
+        BallManager bm =LevelLoader.levels[LevelLoader.currentLevel].GetComponentInChildren<BallManager>();
+        bm.enabled = false;
         Debug.Log("Win Triggered");
         winEvent.Invoke();
     }
 
     public static void Lose()
     {
-        Debug.Log("Loss Triggered");
+        Debug.Log("tried to call lose, winstate was: " + winState);
         lossEvent.Invoke();
-        FreezeProjectiles();
     }
 
     public static void OutOfTries()
     {
-        outOfTriesEvent.Invoke();
+        Debug.Log("tried to call outoftries, winstate was: " + winState);
+        outOfTriesEvent.Invoke();   
     }
 
     public static void FreezeProjectiles()
@@ -74,7 +76,7 @@ public class WinConditionManager : MonoBehaviour
     {
         DestroyParticles();
         DestroyProjectiles();
-        winState = false;
+        winState = true;
     }
 
     public static bool winCheck()

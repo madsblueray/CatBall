@@ -8,16 +8,12 @@ using UnityEngine;
 public class LevelProperties : MonoBehaviour
 {
     public int levelIndex;
-    public GameObject prefabReference;
+
+    [Header("Wall order: Ceiling, Floor, Left, Right")]
+    public int[] wallTypes;
     void Start()
     {
         String num = gameObject.name[^1] + " ";
         levelIndex = int.Parse(num);
-    }
-
-    public GameObject SpawnCopy()
-    {
-        
-        return Instantiate(prefabReference);
     }
 }

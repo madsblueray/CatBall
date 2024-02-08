@@ -21,6 +21,11 @@ public class WallType : MonoBehaviour
     
     void Start()
     {
+        RefreshColors();
+    }
+
+    public void RefreshColors()
+    {
         light_ = GetComponentInChildren<Light2D>();
         light_.color = colors[type];
 

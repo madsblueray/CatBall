@@ -8,8 +8,9 @@ public class FollowCursor1D : MonoBehaviour
 
     void Awake()
     {
-        Off();
-        activateIfInLevel(LevelLoader.currentLevel);
+        //Off();
+        //activateIfInLevel(LevelLoader.currentLevel);
+        activate();
     }
 
     // Update is called once per frame
@@ -31,6 +32,11 @@ public class FollowCursor1D : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
+    void activate()
+    {
+        On();
+    }
+    
     void activateIfInLevel(int levelIndex)
     {
         if (LevelLoader.currentLevel == gameObject.GetComponentInParent<LevelProperties>().levelIndex)

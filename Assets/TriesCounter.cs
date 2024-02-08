@@ -15,6 +15,7 @@ public class TriesCounter : MonoBehaviour
         BallLauncher.BallLaunchedStatic += LoseATry;
         WinConditionManager.lossEvent += IncreaseCounterWobble;
         WinConditionManager.outOfTriesEvent += Reset;
+        WinConditionManager.winEvent += Reset;
         LevelLoader.OnLevelChange += EnableText;
         text = gameObject.GetComponent<TMP_Text>();
         InitializeTries();
@@ -49,6 +50,7 @@ public class TriesCounter : MonoBehaviour
 
     void IncreaseCounterWobble()
     {
+        Debug.Log("IncreaseCounterWobble was called.");
         gameObject.GetComponent<TextWobblerCharacter>().amplitude+=(1f/Tries*2);
         gameObject.GetComponent<TextWobblerCharacter>().y+=.66667f;
     }

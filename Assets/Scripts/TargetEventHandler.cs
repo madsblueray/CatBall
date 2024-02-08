@@ -9,7 +9,7 @@ public class TargetEventHandler : MonoBehaviour
     
     public TransformStorage[] SpawnPoints;
 
-    int destroyed;
+    public int destroyed;
 
     public ParticleSystem parsys;
 
@@ -42,7 +42,7 @@ public class TargetEventHandler : MonoBehaviour
 
     void SpawnParticlesAtTarget(int index)
     {
-        Instantiate(parsys, Targets[index].transform.localPosition, new Quaternion(0,0,0,0));
+        Instantiate(parsys, Targets[index].transform.position, new Quaternion(0,0,0,0));
     }
 
     void RespawnTargets()

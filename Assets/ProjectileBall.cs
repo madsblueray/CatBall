@@ -19,7 +19,10 @@ public class ProjectileBall : MonoBehaviour
 
     void OnDestroy()
     {
-        ballDestroyedInLevel.Invoke(LevelLoader.currentLevel);
+        if (!WinConditionManager.winState)
+        {
+            ballDestroyedInLevel.Invoke(LevelLoader.currentLevel);
+        }
     }
 
     public void PauseTrail()

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public abstract class TextWobbler : MonoBehaviour
+public abstract class ImageWobbler : MonoBehaviour
 {
 
-    public TMP_Text textMesh;
-    public Mesh mesh;
-    public Vector3[] vertices;
+    public SpriteRenderer spriteRenderer;
+    public Vector2[] vertices;
 
     [Range(0f, 10f)]
     public float x;
@@ -24,7 +23,7 @@ public abstract class TextWobbler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textMesh = GetComponent<TMP_Text>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public virtual Vector2 Distort(float time)
@@ -37,7 +36,6 @@ public abstract class TextWobbler : MonoBehaviour
     public void AddAmplitude(float amp){amp_temp = amp;}
 
     //resets the mesh vertices, don't use :()
-    public void SetAlpha(float alpha){textMesh.alpha = alpha;}
 
     
 }

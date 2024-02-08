@@ -15,7 +15,7 @@ public class LevelProgressor : MonoBehaviour
 
     public void LoadLevel(int index)
     {
-        gameObject.transform.position = new Vector3(30*(index-1), 0, -10);
+        gameObject.transform.position = new Vector3(30*(index), 0, -10);
     }
 
 }

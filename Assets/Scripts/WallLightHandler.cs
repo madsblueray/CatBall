@@ -12,15 +12,11 @@ public class WallLightHandler : MonoBehaviour
         lights = gameObject.GetComponentsInChildren<Light2D>();
         BallLauncher.BallLaunchedStatic += LightsOff;
         LevelLoader.OnLevelChange += LightsOn;
-        
     }
 
     public void LightsOff(int levelIndex)
     {
-        if (GetComponentInParent<LevelProperties>().levelIndex == levelIndex)
-        {
-            LightsOff();
-        }
+        LightsOff();
     }
 
     public void LightsOff()
@@ -33,10 +29,7 @@ public class WallLightHandler : MonoBehaviour
 
     public void LightsOn(int levelIndex)
     {
-        if (GetComponentInParent<LevelProperties>().levelIndex == levelIndex)
-        {
-            LightsOn();
-        }
+        LightsOn();
     }
 
     public void LightsOn()

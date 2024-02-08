@@ -23,10 +23,11 @@ public class LevelLoader : MonoBehaviour
     public GameObject WinUI;
     public GameObject WinManager;
 
-    void Update()
+    /*void Update()
     {
-        curLevDebug = currentLevel;
+        curLevDebug = currentLevel; i'm sorry  ;,,,,()
     }
+    */
     void Start()
     {
         currentLevel = startingLevel;
@@ -37,11 +38,14 @@ public class LevelLoader : MonoBehaviour
     {
         //broadcast that it's time to set up a level back to square 1
         //hook up UI to that level's components
-        currentLevel = levelIndex;
         OnLevelChange.Invoke(levelIndex);
+        currentLevel = levelIndex;
         GameObject level = levels[levelIndex];
-        GameObject platform = level.GetComponentInChildren<FollowCursor1D>(true).gameObject;
-        platform.SetActive(true);
+        if (levelIndex > 0) {
+            level.GetComponentInChildren<BallManager>(true).gameObject.SetActive(true);
+        }
+        //GameObject platform = level.GetComponentInChildren<FollowCursor1D>(true).gameObject;
+        //platform.SetActive(true);
     }
 
     public void NextLevel()
@@ -49,27 +53,15 @@ public class LevelLoader : MonoBehaviour
         LoadLevel(currentLevel+1);
     }
 
-    public void ResetLevel()
+    public void PrevLevel()
     {
-        ResetLevel(currentLevel);
-    }
-
-    public void ResetLevel(int levelIndex)
-    {
-        GameObject newLevel = (GameObject)levels[levelIndex].GetComponent<LevelProperties>().SpawnCopy();
-        Destroy(levels[levelIndex]); // or maybe some other cleanup thang
-        newLevel.name += "." + currentLevel;
-        levels[levelIndex] = newLevel;
-
-        LoadLevel(currentLevel);   
+        LoadLevel(currentLevel-1);
     }
 
     void GenerateLevelsList()
     {
-        List<GameObject> temp = new List<GameObject>(){null};
-        List<GameObject> temp2 = new List<GameObject>(GameObject.FindGameObjectsWithTag("Level"));  
-        temp2.Sort(GLLSortComparer);
-        temp.AddRange(temp2);
+        List<GameObject> temp = new List<GameObject>(GameObject.FindGameObjectsWithTag("Level"));  
+        temp.Sort(GLLSortComparer);
         levels = temp;
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class BallManager : MonoBehaviour
 {
@@ -13,13 +14,17 @@ public class BallManager : MonoBehaviour
     LevelProperties lp;
     BallLauncher ball;
 
-    void Start()
+    public delegate void LauncherReady(int levelIndex);
+    public static event LauncherReady LauncherReadyEvent;
+
+    void Awake()
     {
         lp = GetComponentInParent<LevelProperties>();
+        LauncherReadyEvent.Invoke(lp.levelIndex);
         ProjectileBall.ballDestroyedInLevel += Decrement;
         ballsExpected = gameObject.GetComponentInChildren<BallLauncher>().ballCount;
+        WinConditionManager.winEvent += CleanUp;
     }
-
 
     void Decrement()
     {
@@ -31,7 +36,6 @@ public class BallManager : MonoBehaviour
         {
             Decrement();
             checkLose();
-            
         }
     }
 
@@ -58,25 +62,32 @@ public class BallManager : MonoBehaviour
         ballsDestroyed = 0;
     }
 
-    void Win()
-    {
-        Debug.Log("BallManager triggered win");
-        WinConditionManager.Win();
-    }
-
     void CleanUp()
     {
-        ballsDestroyed = 0;
-        ballsExpected = 0;
-        this.enabled = false;
+        CleanUp(GetComponentInParent<LevelProperties>().levelIndex);
+    }
+    
+    void CleanUp(int index)
+    {
+        if (index == LevelLoader.currentLevel)
+        {
+            ballsDestroyed = 0;
+            ballsExpected = 0;
+            gameObject.SetActive(false);
+        }
+        
     }
 
     void ResetBall()
     {
         ball = GetComponentInChildren<BallLauncher>(true);
         Debug.Log("ball: " + ball);
+        ball.enabled = true;
         ball.gameObject.SetActive(true);
-        ball.curballCount = ball.ballCount;
         ball.GetComponent<SpriteRenderer>().enabled = true;
+        ball.curballCount = ball.ballCount;
+        
     }
+
+    
 }

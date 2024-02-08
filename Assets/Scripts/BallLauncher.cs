@@ -21,8 +21,8 @@ public class BallLauncher : MonoBehaviour
 
     Vector2 launchVector;
     [SerializeField] public LaunchPath Path;
-    public Rigidbody2D rb2d;
     public GameObject ball;
+    public LaunchPoint LP;
 
     public int ballCount;
     public int curballCount;
@@ -52,12 +52,15 @@ public class BallLauncher : MonoBehaviour
         launchVector.Scale(new Vector2(10f, 10f));
         Path.Reset();
         //BallLaunched.Invoke(LevelLoader.currentLevel);
+        WinConditionManager.winState = false;
         BallLaunchedStatic.Invoke(LevelLoader.currentLevel);
         GetComponent<SpriteRenderer>().enabled = false;
-        StartCoroutine(LaunchCopy());
+        LP.LaunchBalls(launchVector);
+        //StartCoroutine(LaunchCopy());
+        //enabled = false;
     }
 
-    IEnumerator LaunchCopy()
+    /* IEnumerator LaunchCopy()
     {
         for (int i = 0; i < ballCount; i++)
         {
@@ -72,11 +75,16 @@ public class BallLauncher : MonoBehaviour
             }
         }
         gameObject.SetActive(false);
-    }
+    } */
 
     public void disableLaunch()
     {
         allowedToLaunch = false;
+    }
+
+    public bool AllowedToLaunch()
+    {
+        return allowedToLaunch;
     }
 
 }

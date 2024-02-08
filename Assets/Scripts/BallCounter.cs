@@ -13,7 +13,8 @@ public class BallCounter : MonoBehaviour
     
     void Start()
     {
-        LevelLoader.OnLevelChange += ChangeBalls;
+        //LevelLoader.OnLevelChange += ChangeBalls;
+        BallManager.LauncherReadyEvent += ChangeBalls;
     }
     void Update()
     {
