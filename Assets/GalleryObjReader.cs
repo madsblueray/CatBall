@@ -14,16 +14,16 @@ public struct GalleryImgInfo
     Vector3 Scale;
     bool[] Flip;
 
-    public GalleryImgTransform(SpriteRenderer sr)
+    public GalleryImgInfo(SpriteRenderer sr)
     {
         Cat = sr.sprite;
         Pos = sr.gameObject.transform.localPosition;
-        Scale = sr.gameObject.transform.scale;
-        Flip = new bool[sr.flipX, sr.flipY];
+        Scale = sr.gameObject.transform.localScale;
+        Flip = new bool[] {sr.flipX, sr.flipY};
     }
 
     //this info will be stored in some simple component on the gallery object proba
-    public GalleryImgTransform(Sprite cat, Vector3 pos, Vector3 scale, bool[] flip)
+    public GalleryImgInfo(Sprite cat, Vector3 pos, Vector3 scale, bool[] flip)
     {
         Cat = cat;
         Pos = pos;
@@ -33,14 +33,17 @@ public struct GalleryImgInfo
 
     public void LoadAttributesToSpriteRenderer(SpriteRenderer sr)
     {
-
+        sr.sprite = Cat;
+        sr.transform.position = Pos;
+        sr.transform.localScale = Scale;
+        sr.flipX = Flip[0];
+        sr.flipY = Flip[1];
     }
-
 }
 
 public class GalleryCatText
 {
-    String name;
-    String attributes;
-    String desc;
+    string name;
+    string attributes;
+    string desc;
 }
