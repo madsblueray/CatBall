@@ -1,13 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GalleryObjReader : MonoBehaviour
 {
-    
+    public TMP_Text Name;
+    public TMP_Text Attributes;
+    public TMP_Text Desc;
+
+    public SpriteRenderer SR;
+
+    void Start()
+    {
+        GalleryObject.galleryObjectClicked += LoadReader;
+    }
+
+    public void LoadReader(GalleryImgInfo ImgInfo, GalleryCatText CatText)
+    {
+        ImgInfo.LoadAttributesToSpriteRenderer(SR);
+        CatText.LoadAttributesToTMP(Name, Attributes, Desc);
+    }
 }
 
-public struct GalleryImgInfo
+public class GalleryImgInfo
 {
     public Sprite Cat;
     Vector3 Pos;
@@ -34,7 +50,7 @@ public struct GalleryImgInfo
     public void LoadAttributesToSpriteRenderer(SpriteRenderer sr)
     {
         sr.sprite = Cat;
-        sr.transform.position = Pos;
+        sr.transform.localPosition = Pos;
         sr.transform.localScale = Scale;
         sr.flipX = Flip[0];
         sr.flipY = Flip[1];
@@ -43,7 +59,21 @@ public struct GalleryImgInfo
 
 public class GalleryCatText
 {
-    string name;
-    string attributes;
-    string desc;
+    string Name;
+    string Attributes;
+    string Desc;
+
+    public GalleryCatText(string name, string attributes, string desc)
+    {
+        Name = name;
+        Attributes = attributes;
+        Desc = desc;
+    }
+
+    public void LoadAttributesToTMP(TMP_Text name, TMP_Text attr, TMP_Text desc)
+    {
+        name.text = Name;
+        attr.text = Attributes;
+        desc.text = Desc;
+    }
 }
