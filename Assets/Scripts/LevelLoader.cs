@@ -43,6 +43,7 @@ public class LevelLoader : MonoBehaviour
         GameObject level = levels[levelIndex];
         if (levelIndex > 0) {
             level.GetComponentInChildren<BallManager>(true).gameObject.SetActive(true);
+            //level.GetComponentInChildren<BallManager>().gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
         //GameObject platform = level.GetComponentInChildren<FollowCursor1D>(true).gameObject;
         //platform.SetActive(true);

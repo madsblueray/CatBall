@@ -19,11 +19,13 @@ public class BallManager : MonoBehaviour
 
     void Awake()
     {
+        ball = GetComponentInChildren<BallLauncher>(true);
         lp = GetComponentInParent<LevelProperties>();
         LauncherReadyEvent.Invoke(lp.levelIndex);
         ProjectileBall.ballDestroyedInLevel += Decrement;
         ballsExpected = gameObject.GetComponentInChildren<BallLauncher>().ballCount;
         WinConditionManager.winEvent += CleanUp;
+        LevelLoader.OnLevelChange += CleanUp;
     }
 
     void Decrement()
@@ -73,6 +75,7 @@ public class BallManager : MonoBehaviour
         {
             ballsDestroyed = 0;
             ballsExpected = 0;
+            ResetBall();
             gameObject.SetActive(false);
         }
         
@@ -80,8 +83,6 @@ public class BallManager : MonoBehaviour
 
     void ResetBall()
     {
-        ball = GetComponentInChildren<BallLauncher>(true);
-        Debug.Log("ball: " + ball);
         ball.enabled = true;
         ball.gameObject.SetActive(true);
         ball.GetComponent<SpriteRenderer>().enabled = true;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class ChildTextManager : MonoBehaviour
@@ -18,10 +19,12 @@ public class ChildTextManager : MonoBehaviour
         if (TrueForWinUI) 
         {
             WinConditionManager.winEvent += Deploy;
+            WinConditionManager.winEvent += PlaySound;
         }
         else
         {
             WinConditionManager.outOfTriesEvent += Deploy;
+            WinConditionManager.outOfTriesEvent += PlaySound;
         }
     }
 
@@ -73,5 +76,11 @@ public class ChildTextManager : MonoBehaviour
     void changeChildTargets(int levelIndex)
     {
         //maybe do something later :3c nya~
+    }
+
+    void PlaySound()
+    {
+        AudioSource victorySound = gameObject.GetComponent<AudioSource>();
+        victorySound.Play();
     }
 }
