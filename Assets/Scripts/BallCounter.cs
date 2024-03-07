@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,7 +13,6 @@ public class BallCounter : MonoBehaviour
     
     void Start()
     {
-        //LevelLoader.OnLevelChange += ChangeBalls;
         BallManager.LauncherReadyEvent += ChangeBalls;
     }
     void Update()

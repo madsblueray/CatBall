@@ -54,9 +54,9 @@ public class BallLauncher : MonoBehaviour
         //BallLaunched.Invoke(LevelLoader.currentLevel);
         WinConditionManager.winState = false;
         BallLaunchedStatic.Invoke(LevelLoader.currentLevel);
-        GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<AudioSource>().Play();
         LP.LaunchBalls(launchVector);
+        gameObject.SetActive(false);
         //StartCoroutine(LaunchCopy());
         //enabled = false;
     }

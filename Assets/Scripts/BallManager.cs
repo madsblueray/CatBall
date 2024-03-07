@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.WSA;
 
@@ -21,11 +22,21 @@ public class BallManager : MonoBehaviour
     {
         ball = GetComponentInChildren<BallLauncher>(true);
         lp = GetComponentInParent<LevelProperties>();
+
         LauncherReadyEvent.Invoke(lp.levelIndex);
+
         ProjectileBall.ballDestroyedInLevel += Decrement;
+
+        LevelLoader.OnLevelChange += ResetBall;
+        LevelLoader.OnLevelChange += ResetBallCount;
+        LevelLoader.OnLevelChange += LauncherActive;
+        
         ballsExpected = gameObject.GetComponentInChildren<BallLauncher>().ballCount;
-        WinConditionManager.winEvent += CleanUp;
-        LevelLoader.OnLevelChange += CleanUp;
+    }
+
+    void LauncherActive(int level_index)
+    {
+        if (level_index == lp.levelIndex) LauncherReadyEvent.Invoke(lp.levelIndex);
     }
 
     void Decrement()
@@ -64,31 +75,19 @@ public class BallManager : MonoBehaviour
         ballsDestroyed = 0;
     }
 
-    void CleanUp()
-    {
-        CleanUp(GetComponentInParent<LevelProperties>().levelIndex);
-    }
-    
-    void CleanUp(int index)
-    {
-        if (index == LevelLoader.currentLevel)
-        {
-            ballsDestroyed = 0;
-            ballsExpected = 0;
-            ResetBall();
-            gameObject.SetActive(false);
-        }
-        
-    }
-
     void ResetBall()
     {
-        ball.enabled = true;
         ball.gameObject.SetActive(true);
-        ball.GetComponent<SpriteRenderer>().enabled = true;
         ball.curballCount = ball.ballCount;
-        
     }
 
-    
+    void ResetBall(int level_index)
+    {
+        if (LevelLoader.currentLevel == lp.levelIndex) ResetBall();
+    }
+
+    void ResetBallCount(int level_index)  
+    {
+        ballsDestroyed = 0;
+    }
 }
