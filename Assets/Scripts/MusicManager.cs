@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    public AudioSource audio;
+    public bool mute;
+
+    public void LoadData(GameData data)
+    {
+        mute = data.music_mute;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.music_mute= mute;
+    }
+
+    public AudioSource Audio;
     public AnimationCurve fadeIn;
-    public bool enableMusic;
-    public static bool enableSFX;
 
     public void DuckAway()
     {
-        audio.volume = 0.1f;
+        Audio.volume = 0.1f;
     }
 }
 

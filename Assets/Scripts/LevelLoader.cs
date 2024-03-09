@@ -9,7 +9,7 @@ using UnityEngine.Rendering.Universal.Internal;
 
 
 
-public class LevelLoader : MonoBehaviour
+public class LevelLoader : MonoBehaviour, IDataPersistence
 {
     //Basically this thing is gonna drag and drop components
     //So that the moving UI is working and certain events are reset
@@ -23,11 +23,16 @@ public class LevelLoader : MonoBehaviour
     public GameObject WinUI;
     public GameObject WinManager;
 
-    /*void Update()
+    public void LoadData(GameData data)
     {
-        curLevDebug = currentLevel; i'm sorry  ;,,,,()
+        currentLevel = data.current_level;
     }
-    */
+
+    public void SaveData(ref GameData data)
+    {
+        data.current_level = currentLevel;
+    }
+
     void Start()
     {
         currentLevel = startingLevel;

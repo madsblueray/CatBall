@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TriesCounter : MonoBehaviour
+public class TriesCounter : MonoBehaviour, IDataPersistence
 {
     public static int Tries {get; set;}
     public static int curTries {get; set;}
     TMP_Text text;
+
+    public void LoadData(GameData data)
+    {
+        Tries = data.current_tries;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.current_tries = Tries;
+    }
     
     // Start is called before the first frame update
     void Start()
