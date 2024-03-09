@@ -5,20 +5,27 @@ using UnityEngine;
 
 public class DataPersistenceManager : MonoBehaviour
 {
+    [Header("File Store Config")]
+
+    [SerializeField] string fileName;
 
     private GameData gameData;
     public static DataPersistenceManager instance {get; private set;}
 
     public List<IDataPersistence> dataPersistenceObjects;
 
+    FileDataHandler dataHandler;
+
     private void Start()
     {
-        LoadGame();
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        LoadGame();
     }
 
     private void OnApplicationQuit()
     {
+        Debug.Log("I QUIT!!!!!");
         SaveGame();
     }
 
@@ -39,7 +46,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
-        if (instance == null)
+        this.gameData = dataHandler.Load();
+        if (this.gameData == null)
         {
             Debug.LogError("No data found, loading new game");
             NewGame();
@@ -58,6 +66,8 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.SaveData(ref this.gameData);
         }
+
+        dataHandler.Save(gameData);
     }
 
     List<IDataPersistence> FindAllDataPersistenceObjects()
@@ -65,6 +75,7 @@ public class DataPersistenceManager : MonoBehaviour
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>()
             .OfType<IDataPersistence>();
 
+        Debug.Log(new List<IDataPersistence>(dataPersistenceObjects));
         return new List<IDataPersistence>(dataPersistenceObjects);
     }
 }
