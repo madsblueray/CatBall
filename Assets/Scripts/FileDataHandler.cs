@@ -32,6 +32,7 @@ public class FileDataHandler : MonoBehaviour
                     }
                 }
                 loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
+                Debug.Log(loadedData);
             }
             catch(Exception e)
             {

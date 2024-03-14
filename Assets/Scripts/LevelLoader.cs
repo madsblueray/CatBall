@@ -35,7 +35,7 @@ public class LevelLoader : MonoBehaviour, IDataPersistence
 
     void Start()
     {
-        currentLevel = startingLevel;
+        if (currentLevel == 0) currentLevel = startingLevel;
         GenerateLevelsList();
         LoadLevel(currentLevel);
     }

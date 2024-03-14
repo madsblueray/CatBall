@@ -25,7 +25,7 @@ public class GameData : MonoBehaviour
     public GameData()
     {
         cats_discovered = 0;
-        current_level = 1;
+        current_level = 0;
         current_tries = 3;
         sfx_mute = false;
         music_mute = false;

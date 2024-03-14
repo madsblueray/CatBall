@@ -11,16 +11,16 @@ public class TriesCounter : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        Tries = data.current_tries;
+        curTries = data.current_tries;
     }
 
     public void SaveData(ref GameData data)
     {
-        data.current_tries = Tries;
+        data.current_tries = curTries;
     }
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         BallLauncher.BallLaunchedStatic += LoseATry;
         WinConditionManager.lossEvent += IncreaseCounterWobble;
@@ -43,7 +43,11 @@ public class TriesCounter : MonoBehaviour, IDataPersistence
         {
             Tries = 3;
         }
-        curTries = Tries;
+        if (curTries == 0)
+        {
+            curTries = Tries;
+            
+        }
         UpdateText();
     }
 
