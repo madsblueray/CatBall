@@ -24,14 +24,16 @@ public class FileDataHandler : MonoBehaviour
             try
             {
                 string dataToLoad = "";
-                using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
                 {
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         dataToLoad = reader.ReadToEnd();
                     }
                 }
-                loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
+                Debug.Log(dataToLoad);
+                loadedData = new GameData();
+                JsonUtility.FromJsonOverwrite(dataToLoad, loadedData);
                 Debug.Log(loadedData);
             }
             catch(Exception e)
@@ -39,7 +41,6 @@ public class FileDataHandler : MonoBehaviour
                 Debug.LogError("Error when trying to load file: " + fullPath + "\n" + e);
             }
         }
-        Debug.Log(loadedData);
         return loadedData;
     }
 

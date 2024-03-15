@@ -32,6 +32,11 @@ public class LevelLoader : MonoBehaviour, IDataPersistence
     {
         data.current_level = currentLevel;
     }
+    
+    public void StartGame()
+    {
+        LoadLevel(currentLevel);
+    }
 
     void Start()
     {

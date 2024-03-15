@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TriesCounter : MonoBehaviour, IDataPersistence
@@ -27,6 +28,7 @@ public class TriesCounter : MonoBehaviour, IDataPersistence
         WinConditionManager.outOfTriesEvent += Reset;
         WinConditionManager.winEvent += Reset;
         LevelLoader.OnLevelChange += EnableText;
+        LevelLoader.OnLevelChange += UpdateText;
         text = gameObject.GetComponent<TMP_Text>();
         InitializeTries();
     }
@@ -72,6 +74,11 @@ public class TriesCounter : MonoBehaviour, IDataPersistence
     void UpdateText()
     {
         text.text = "tries: " + curTries;
+    }
+
+    void UpdateText(int ballsack)
+    {
+        UpdateText();
     }
     
     public int GetTries()

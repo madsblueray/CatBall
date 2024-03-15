@@ -21,6 +21,7 @@ public class GalleryObject : MonoBehaviour
     public Vector3 Pos;
     public Vector3 localScale;
     public bool[] Flip;
+    public int ID;
 
     GalleryCatText gct;
     GalleryImgInfo gii;

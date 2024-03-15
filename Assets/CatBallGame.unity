@@ -4040,7 +4040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c5b1063d146441fbb9255c68b2d408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.game
+  fileName: data.txt
 --- !u!4 &996013802
 Transform:
   m_ObjectHideFlags: 0

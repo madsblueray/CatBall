@@ -72,10 +72,16 @@ public class DataPersistenceManager : MonoBehaviour
 
     List<IDataPersistence> FindAllDataPersistenceObjects()
     {
-        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>()
-            .OfType<IDataPersistence>();
-
-        Debug.Log(new List<IDataPersistence>(dataPersistenceObjects));
-        return new List<IDataPersistence>(dataPersistenceObjects);
+        List<IDataPersistence> dataPersistenceObjects = new List<IDataPersistence>();
+        MonoBehaviour[] monos = FindObjectsOfType<MonoBehaviour>();
+        foreach (MonoBehaviour mono in monos)
+        {
+            var tempIData = mono as IDataPersistence;
+            if (mono is IDataPersistence)
+            {
+                dataPersistenceObjects.Add(tempIData);
+            }
+        }
+        return dataPersistenceObjects;
     }
 }
