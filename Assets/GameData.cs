@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,15 @@ public class GameData
         sfx_mute = false;
         music_mute = false;
         trackID = 001;
+    }
+
+    public void OutOfBoundsFixer()
+    {
+        if (current_tries < 1)
+        {
+            current_tries = 3;
+            current_level = Math.Max(0, current_level - 1);
+        }
     }
 
 

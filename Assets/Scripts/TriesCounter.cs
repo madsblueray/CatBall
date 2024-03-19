@@ -30,22 +30,22 @@ public class TriesCounter : MonoBehaviour, IDataPersistence
         LevelLoader.OnLevelChange += EnableText;
         LevelLoader.OnLevelChange += UpdateText;
         text = gameObject.GetComponent<TMP_Text>();
-        InitializeTries();
+        InitializeTries(true);
     }
 
     void InitializeTries(int levelIndex)
     {
         if (levelIndex == LevelLoader.currentLevel){
-            InitializeTries();
+            InitializeTries(true);
         }
     }
-    void InitializeTries()
+    void InitializeTries(bool ignore)
     {
         if (Tries == 0)
         {
             Tries = 3;
         }
-        if (curTries == 0)
+        if (curTries == 0 || ignore)
         {
             curTries = Tries;
             
@@ -95,7 +95,7 @@ public class TriesCounter : MonoBehaviour, IDataPersistence
     {
         gameObject.GetComponent<TextWobblerCharacter>().amplitude=0;
         gameObject.GetComponent<TextWobblerCharacter>().y=0;
-        InitializeTries();
+        InitializeTries(true);
         text.enabled = false;
     }
 

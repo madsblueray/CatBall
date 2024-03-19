@@ -17,6 +17,8 @@ public class TargetCollisionSystem : MonoBehaviour
     public TMP_Text text;
     public int anchorPoint = 4;
     private readonly Vector2[,] anchorPoints = new Vector2[3,3];
+
+    bool popped = false;
     
     
 
@@ -64,9 +66,11 @@ public class TargetCollisionSystem : MonoBehaviour
         curHP-=1;
 		playSound();
 
-        if (curHP < 1)
+        if (curHP < 1 && !popped)
         {
+            Debug.Log("this target was called to be popped: " + index);
             targetPopped.Invoke(index);
+            popped = true;
         }
 
         if (shrinkOnHit) Shrink(other);
@@ -124,5 +128,6 @@ public class TargetCollisionSystem : MonoBehaviour
     public void ResetHP()
     {
         curHP = HP;
+        popped = false;
     }
 }

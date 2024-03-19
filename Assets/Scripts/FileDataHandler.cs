@@ -34,7 +34,7 @@ public class FileDataHandler : MonoBehaviour
                 Debug.Log(dataToLoad);
                 loadedData = new GameData();
                 JsonUtility.FromJsonOverwrite(dataToLoad, loadedData);
-                Debug.Log(loadedData);
+                loadedData.OutOfBoundsFixer();
             }
             catch(Exception e)
             {

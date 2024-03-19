@@ -64,11 +64,6 @@ public class TargetEventHandler : MonoBehaviour
             allTargetsDisabled.Invoke();
         }
     }
-
-    void RespawnBall()
-    {
-        
-    }
 }
 
 public class TransformStorage

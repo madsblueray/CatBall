@@ -9,6 +9,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     [SerializeField] string fileName;
 
+    public bool ResetDataDebug;
+
     private GameData gameData;
     public static DataPersistenceManager instance {get; private set;}
 
@@ -47,7 +49,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void LoadGame()
     {
         this.gameData = dataHandler.Load();
-        if (this.gameData == null)
+        if (this.gameData == null || ResetDataDebug)
         {
             Debug.LogError("No data found, loading new game");
             NewGame();
