@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TargetEventHandler : MonoBehaviour
 {
+    public CatsCollectedReader CCR;
     // Drag & drop the objects in the inspector
     public GameObject[] Targets;
     
@@ -34,6 +35,7 @@ public class TargetEventHandler : MonoBehaviour
     {
         Debug.Log("TargetDeactivated");
         SpawnParticlesAtTarget(index);
+        CCR.DiscoverCat(Targets[index].GetComponent<Cattributes>());
         Targets[index].SetActive(false);
         destroyed++;
         checkForWin();
