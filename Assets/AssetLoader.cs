@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AssetLoader : MonoBehaviour
@@ -11,4 +13,52 @@ public class AssetLoader : MonoBehaviour
 
     //Start vs awake: usually Awake() will be left alone. Any initializing operations
     //tucked into Start() will be replaced
+
+    //find all instances of implementing the bootstrapped interface
+    //sort them into priority order
+    //exeute their initializer functions in that order, breaking ties by??? 
+    //maybe just by component name
+    List<Bootstrapped> objectsToLoad;
+
+    void Start()
+    {
+        InitializeBootstrappedComponents();
+    }
+
+    void InitializeBootstrappedComponents()
+    {
+        int rank = 1;
+        objectsToLoad = FindAllBootstrappedComponents();
+        objectsToLoad.Sort(IBCSortComparer);
+        foreach(Bootstrapped obj in objectsToLoad)
+        {
+            obj.Initialize();
+            Debug.Log(((MonoBehaviour)obj).name + "has been initialized in rank: " + rank);
+            rank++;
+        }
+        
+    }
+
+    int IBCSortComparer(Bootstrapped b1, Bootstrapped b2)
+    {
+        return Math.Sign(b1.Priority - b2.Priority);
+    }
+
+    List<Bootstrapped> FindAllBootstrappedComponents()
+    {
+        List<Bootstrapped> strappedObjects = new List<Bootstrapped>();
+        MonoBehaviour[] monos = FindObjectsOfType<MonoBehaviour>(true);
+
+        //the following part is not efficient at all but unity has not played nice
+        //with FindOBjOfType so this is just a brute force workaround. cuz idk.
+        foreach (MonoBehaviour mono in monos)
+        {
+            var tempBoot = mono as Bootstrapped;
+            if (mono is Bootstrapped)
+            {
+                strappedObjects.Add(tempBoot);
+            }
+        }
+        return strappedObjects;
+    }
 }
