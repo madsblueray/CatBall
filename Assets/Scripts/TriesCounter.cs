@@ -4,8 +4,16 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TriesCounter : MonoBehaviour, IDataPersistence
+public class TriesCounter : MonoBehaviour, IDataPersistence, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
     public static int Tries {get; set;}
     public static int curTries {get; set;}
     TMP_Text text;
@@ -20,7 +28,6 @@ public class TriesCounter : MonoBehaviour, IDataPersistence
         data.current_tries = curTries;
     }
     
-    // Start is called before the first frame update
     void Awake()
     {
         BallLauncher.BallLaunchedStatic += LoseATry;
@@ -33,12 +40,18 @@ public class TriesCounter : MonoBehaviour, IDataPersistence
         InitializeTries(true);
     }
 
-    void InitializeTries(int levelIndex)
+    public void Initialize()
     {
-        if (levelIndex == LevelLoader.currentLevel){
-            InitializeTries(true);
-        }
+        BallLauncher.BallLaunchedStatic += LoseATry;
+        WinConditionManager.lossEvent += IncreaseCounterWobble;
+        WinConditionManager.outOfTriesEvent += Reset;
+        WinConditionManager.winEvent += Reset;
+        LevelLoader.OnLevelChange += EnableText;
+        LevelLoader.OnLevelChange += UpdateText;
+        text = gameObject.GetComponent<TMP_Text>();
+        InitializeTries(true);
     }
+
     void InitializeTries(bool ignore)
     {
         if (Tries == 0)

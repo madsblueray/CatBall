@@ -7,8 +7,16 @@ using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public class WinConditionManager : MonoBehaviour
+public class WinConditionManager : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
     public static bool winState = true;
     public delegate void EndOfGameEvent();
     public static event EndOfGameEvent lossEvent;
@@ -17,6 +25,13 @@ public class WinConditionManager : MonoBehaviour
 
     // Update is called once per frame
     void Start()
+    {
+        LevelLoader.OnLevelChange += EndOfLevelCleanup;
+        TargetEventHandler.allTargetsDisabled += Win;
+        //TargetEventHandler.onAllObjectsDisabled += Win;
+    }
+
+    public void Initialize()
     {
         LevelLoader.OnLevelChange += EndOfLevelCleanup;
         TargetEventHandler.allTargetsDisabled += Win;

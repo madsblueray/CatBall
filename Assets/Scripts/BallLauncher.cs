@@ -9,8 +9,16 @@ using Unity.VisualScripting;
 using System.Threading;
 using UnityEditor;
 
-public class BallLauncher : MonoBehaviour
+public class BallLauncher : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log("BallLauncher priority: " + priority);
+            return priority;
+        }
+    }
     public delegate void BallLaunchEvent(int levelIndex);
     public event BallLaunchEvent BallLaunched;
     public static event BallLaunchEvent BallLaunchedStatic;
@@ -28,7 +36,12 @@ public class BallLauncher : MonoBehaviour
     public int curballCount;
     public float myDelay = 0.5f;
     
-    void Start()
+    void Awake()
+    {
+        curballCount = ballCount;
+    }
+
+    public void Initialize()
     {
         curballCount = ballCount;
     }

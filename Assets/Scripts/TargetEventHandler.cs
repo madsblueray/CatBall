@@ -19,7 +19,7 @@ public class TargetEventHandler : MonoBehaviour
     public static event LevelEvent allTargetsDisabled;
 
     
-    void Start ()
+    void Awake()
     {
         SpawnPoints = new TransformStorage[Targets.Length];
         for( int i = 0 ; i < Targets.Length ; ++i )

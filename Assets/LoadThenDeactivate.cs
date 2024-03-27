@@ -8,4 +8,9 @@ public class LoadThenDeactivate : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void Initialize()
+    {
+        gameObject.SetActive(false);
+    }
 }

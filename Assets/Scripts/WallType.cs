@@ -19,7 +19,7 @@ public class WallType : MonoBehaviour
 
     public Gradient[] gradients;
     
-    void Start()
+    void Awake()
     {
         RefreshColors();
     }

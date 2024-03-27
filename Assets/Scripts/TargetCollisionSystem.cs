@@ -41,7 +41,7 @@ public class TargetCollisionSystem : MonoBehaviour
     public event TargetPopped targetPopped;
 
 
-    void Start()
+    void Awake()
     {
         curHP = HP;
         InitializeAnchorPoints();

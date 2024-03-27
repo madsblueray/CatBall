@@ -4,8 +4,16 @@ using TMPro;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
-public class ChildTextManager : MonoBehaviour
+public class ChildTextManager : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
 
     public TMP_Text[] texts;
     public bool TrueForWinUI;
@@ -14,6 +22,21 @@ public class ChildTextManager : MonoBehaviour
     //behind the scenes that looks ugly in the console if on when the text is off
 
     void Start()
+    {
+        LevelLoader.OnLevelChange += changeChildTargets;
+        if (TrueForWinUI) 
+        {
+            WinConditionManager.winEvent += Deploy;
+            WinConditionManager.winEvent += PlaySound;
+        }
+        else
+        {
+            WinConditionManager.outOfTriesEvent += Deploy;
+            WinConditionManager.outOfTriesEvent += PlaySound;
+        }
+    }
+
+    public void Initialize()
     {
         LevelLoader.OnLevelChange += changeChildTargets;
         if (TrueForWinUI) 

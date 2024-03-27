@@ -9,8 +9,16 @@ using UnityEngine.Rendering.Universal.Internal;
 
 
 
-public class LevelLoader : MonoBehaviour, IDataPersistence
+public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
     //Basically this thing is gonna drag and drop components
     //So that the moving UI is working and certain events are reset
     
@@ -46,6 +54,16 @@ public class LevelLoader : MonoBehaviour, IDataPersistence
         levels[0].SetActive(true);
         //LoadLevel(currentLevel);
     }
+
+    public void Initialize()
+    {
+        if (currentLevel == 0) currentLevel = startingLevel;
+        GenerateLevelsList();
+        Debug.Log("levels: " + levels);
+        levels[0].SetActive(true);
+        //LoadLevel(currentLevel);
+    }
+
     public void LoadLevel(int levelIndex)
     {
         //broadcast that it's time to set up a level back to square 1

@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class FollowCursor1D : MonoBehaviour
+public class FollowCursor1D : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
 
     void Awake()
     {
-        //Off();
-        //activateIfInLevel(LevelLoader.currentLevel);
-        activate();
+        Activate();
+    }
+
+    public void Initialize()
+    {
+        Activate();
     }
 
     // Update is called once per frame
@@ -32,20 +43,8 @@ public class FollowCursor1D : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    void activate()
+    void Activate()
     {
         On();
-    }
-    
-    void activateIfInLevel(int levelIndex)
-    {
-        if (LevelLoader.currentLevel == gameObject.GetComponentInParent<LevelProperties>().levelIndex)
-        {
-            On();
-        }
-        else
-        {
-            Off();
-        }
     }
 }

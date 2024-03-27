@@ -11,7 +11,7 @@ public class ProjectileBall : MonoBehaviour
     TrailRenderer trail;
     float time;
 
-    void Start()
+    void Awake()
     {
         trail = GetComponent<TrailRenderer>();
         time = trail.time;

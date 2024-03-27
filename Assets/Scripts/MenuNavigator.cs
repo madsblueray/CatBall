@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MenuNavigator : MonoBehaviour
 {
+    
     public GameObject[] menus;
     public Menus currentMenu;
 

@@ -12,6 +12,13 @@ public class WallLoader : MonoBehaviour
         LevelLoader.OnLevelChange += LoadWalls;
         LevelLoader.OnLevelChange += MoveWalls;
     }
+
+    public void Initialize()
+    {
+        walls = gameObject.GetComponentsInChildren<WallType>();
+        LevelLoader.OnLevelChange += LoadWalls;
+        LevelLoader.OnLevelChange += MoveWalls;
+    }
     static void LoadWalls(int levelIndex)
     {
         LoadWalls(LevelLoader.levels[levelIndex].GetComponent<LevelProperties>());

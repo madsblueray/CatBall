@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 public class WallLightHandler : MonoBehaviour
 {
     Light2D[] lights;
-    void Start()
+    void Awake()
     {
         lights = gameObject.GetComponentsInChildren<Light2D>();
         BallLauncher.BallLaunchedStatic += LightsOff;

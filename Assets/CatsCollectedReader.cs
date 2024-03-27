@@ -29,6 +29,20 @@ public class CatsCollectedReader : MonoBehaviour, IDataPersistence
         AdjustColorHiddenGalleryObjects();
     }
 
+    public void Initialize()
+    {
+        LevelLoader.OnLevelChange += AdjustColorHiddenGalleryObjects;
+
+        gallery = new Dictionary<int, GameObject>();
+        gallery_collected = new List<int>();
+        foreach (Transform t in galleryContent.transform)
+        {
+            gallery.Add(t.GetComponent<GalleryObject>().ID, t.gameObject);
+        }
+
+        AdjustColorHiddenGalleryObjects();
+    }
+
     public void SaveData(ref GameData data)
     {
         data.cats_discovered = cats_discovered;

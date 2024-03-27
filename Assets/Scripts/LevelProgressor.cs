@@ -2,9 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelProgressor : MonoBehaviour
+public class LevelProgressor : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
     void Start()
+    {
+        LevelLoader.OnLevelChange += LoadLevel;
+    }
+
+    public void Initialize()
     {
         LevelLoader.OnLevelChange += LoadLevel;
     }

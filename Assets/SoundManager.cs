@@ -6,8 +6,16 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class SoundManager : MonoBehaviour, IDataPersistence
+public class SoundManager : MonoBehaviour, IDataPersistence, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
     public delegate void SyncToggleUI();
     public static event SyncToggleUI LoadSoundDataSyncUI;
     public AudioMixer mixer;
@@ -21,6 +29,15 @@ public class SoundManager : MonoBehaviour, IDataPersistence
         SfxToggleCompanion.SFXToggleUpdate += ToggleMute;
         ToggleMute(true, mute_sfx);
         ToggleMute(false, mute_music);
+    }
+
+    public void Initialize()
+    {
+        SfxToggleCompanion.SFXToggleUpdate += ToggleMute;
+        ToggleMute(true, mute_sfx);
+        ToggleMute(false, mute_music);
+
+        LoadSoundDataSyncUI?.Invoke();
     }
     void Awake()
     {

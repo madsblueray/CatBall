@@ -4,8 +4,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BallCounter : MonoBehaviour
+public class BallCounter : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log("BallCounter priority: " + priority);
+            return priority;
+        }
+    }
+
     [SerializeField] 
     public BallLauncher launcher;
     public TMP_Text text;
@@ -15,6 +24,13 @@ public class BallCounter : MonoBehaviour
     {
         BallManager.LauncherReadyEvent += ChangeBalls;
     }
+
+    public void Initialize()
+    {
+        BallManager.LauncherReadyEvent += ChangeBalls;
+    }
+
+
     void Update()
     {
         text.text = "balls: " + launcher.curballCount.ToString();

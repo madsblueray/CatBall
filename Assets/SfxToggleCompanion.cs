@@ -19,6 +19,11 @@ public class SfxToggleCompanion : MonoBehaviour
         SoundManager.LoadSoundDataSyncUI += SyncToggle;
     }
 
+    public void Initialze()
+    {
+        SoundManager.LoadSoundDataSyncUI += SyncToggle;
+    }
+
     public void Toggled()
     {
         SFXToggleUpdate?.Invoke(is_sfx, toggle.isOn);

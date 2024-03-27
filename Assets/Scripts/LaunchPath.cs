@@ -10,8 +10,16 @@ using Vector4 = UnityEngine.Vector4;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
 
-public class LaunchPath : MonoBehaviour
+public class LaunchPath : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
 
     [SerializeField] public LineRenderer path;
     public float length {get; set;}
@@ -28,6 +36,17 @@ public class LaunchPath : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 		path.sortingLayerID = spriteRenderer.sortingLayerID;
     }
+
+    public void Initialize()
+    {
+        path = GetComponent<LineRenderer>();
+        path.positionCount = 2;
+        path.SetPosition(0, transform.position);
+        path.SetPosition(1, transform.position);
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+		path.sortingLayerID = spriteRenderer.sortingLayerID;
+    }
+    
     
     public void Reset()
     {

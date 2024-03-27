@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DataPersistenceManager : MonoBehaviour
+public class DataPersistenceManager : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
     [Header("File Store Config")]
 
     [SerializeField] string fileName;
@@ -18,7 +26,14 @@ public class DataPersistenceManager : MonoBehaviour
 
     FileDataHandler dataHandler;
 
-    private void Start()
+    void Start()
+    {
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        LoadGame();
+    }
+
+    public void Initialize()
     {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();

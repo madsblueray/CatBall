@@ -2,13 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaunchPoint : MonoBehaviour
+public class LaunchPoint : MonoBehaviour, Bootstrapped
 {
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
     public BallLauncher BL;
     public GameObject ball;
     public float myDelay = 0.15f;
 
     void Start()
+    {
+        transform.position = BL.transform.position;
+    }
+
+    public void Initialize()
     {
         transform.position = BL.transform.position;
     }
