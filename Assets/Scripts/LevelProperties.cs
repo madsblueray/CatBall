@@ -13,7 +13,10 @@ public class LevelProperties : MonoBehaviour
     public int[] wallTypes;
     void Start()
     {
-        String num = gameObject.name[^1] + " ";
+        String num = gameObject.name[5..];
+        Debug.Log(gameObject.name);
+        Debug.Log(num);
         levelIndex = int.Parse(num);
+        Debug.Log(levelIndex);
     }
 }

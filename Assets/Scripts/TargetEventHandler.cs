@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TargetEventHandler : MonoBehaviour
 {
+    public GameObject discoveredMessage;
     public CatsCollectedReader CCR;
     // Drag & drop the objects in the inspector
     public GameObject[] Targets;
@@ -35,7 +36,10 @@ public class TargetEventHandler : MonoBehaviour
     {
         Debug.Log("TargetDeactivated");
         SpawnParticlesAtTarget(index);
-        CCR.DiscoverCat(Targets[index].GetComponent<Cattributes>());
+        if (CCR.DiscoverCat(Targets[index].GetComponent<Cattributes>().ID))
+        {
+            SpawnMessageAtTarget(index);
+        }
         Targets[index].SetActive(false);
         destroyed++;
         checkForWin();
@@ -44,7 +48,14 @@ public class TargetEventHandler : MonoBehaviour
 
     void SpawnParticlesAtTarget(int index)
     {
-        Instantiate(parsys, Targets[index].transform.position, new Quaternion(0,0,0,0));
+        ParticleSystem par = Instantiate(parsys, Targets[index].transform.position, new Quaternion(0,0,0,0));
+        par.transform.localScale = Targets[index].transform.localScale;
+    }
+
+    void SpawnMessageAtTarget(int index)
+    {
+        Debug.Log("tried to spawn the thingy");
+        Instantiate(discoveredMessage, Targets[index].transform.position, new Quaternion(0,0,0,0));
     }
 
     void RespawnTargets()

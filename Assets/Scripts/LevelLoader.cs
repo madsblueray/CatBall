@@ -42,21 +42,41 @@ public class LevelLoader : MonoBehaviour, IDataPersistence
     {
         if (currentLevel == 0) currentLevel = startingLevel;
         GenerateLevelsList();
-        LoadLevel(currentLevel);
+        Debug.Log("levels: " + levels);
+        levels[0].SetActive(true);
+        //LoadLevel(currentLevel);
     }
     public void LoadLevel(int levelIndex)
     {
         //broadcast that it's time to set up a level back to square 1
         //hook up UI to that level's components
         OnLevelChange.Invoke(levelIndex);
+        levels[currentLevel].SetActive(false);
+
         currentLevel = levelIndex;
         GameObject level = levels[levelIndex];
+        level.SetActive(true);
+
         if (levelIndex > 0) {
             level.GetComponentInChildren<BallManager>(true).gameObject.SetActive(true);
             //level.GetComponentInChildren<BallManager>().gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
         //GameObject platform = level.GetComponentInChildren<FollowCursor1D>(true).gameObject;
         //platform.SetActive(true);
+    }
+
+    public void OpenMenu(bool win)
+    {
+        levels[currentLevel].SetActive(false);
+        if (win)
+        {
+            currentLevel++;
+        }
+        else
+        {
+            currentLevel--;
+        }
+        levels[0].SetActive(true);
     }
 
     public void NextLevel()
@@ -71,9 +91,12 @@ public class LevelLoader : MonoBehaviour, IDataPersistence
 
     void GenerateLevelsList()
     {
-        List<GameObject> temp = new List<GameObject>(GameObject.FindGameObjectsWithTag("Level"));  
-        temp.Sort(GLLSortComparer);
-        levels = temp;
+        levels = new List<GameObject>(GameObject.FindGameObjectsWithTag("Level"));  
+        levels.Sort(GLLSortComparer);
+        foreach (GameObject level in levels)
+        {
+            level.SetActive(false);
+        }
     }
 
     private int GLLSortComparer(GameObject GO1, GameObject GO2)

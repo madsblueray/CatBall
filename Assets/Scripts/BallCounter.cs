@@ -23,7 +23,7 @@ public class BallCounter : MonoBehaviour
 
     void ChangeBalls(int levelIndex)
     {
-        launcher = LevelLoader.levels[levelIndex].GetComponentInChildren<BallLauncher>();
+        launcher = LevelLoader.levels[levelIndex].GetComponentInChildren<BallLauncher>(true);
         text.alpha = 1;
         //launcher = temp;
     }

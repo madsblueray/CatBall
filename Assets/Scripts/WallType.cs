@@ -61,16 +61,16 @@ public class WallType : MonoBehaviour
             switch (position)
             {
                 case "F":
-                    NudgeY(other,1);
+                    NudgeY(other,2);
                     break;
                 case "C":
-                    NudgeY(other,-1);
+                    NudgeY(other,-2);
                     break;
                 case "L":
-                    NudgeX(other, 1);
+                    NudgeX(other, 2);
                     break;
                 case "R":
-                    NudgeX(other, -1);
+                    NudgeX(other, -2);
                     break;
                 default:
                     break;
@@ -82,7 +82,7 @@ public class WallType : MonoBehaviour
     void NudgeX(Collision2D other, float x)
     {
         Transform T = other.transform;
-        T.position = new Vector3(4.15f*x, T.position.y, T.position.z);
+        T.position = new Vector3(T.position.x + 4.15f*x, T.position.y, T.position.z);
         Vector3 V = other.gameObject.GetComponent<Rigidbody2D>().velocity;
         V = new Vector3(-V.x, V.y, V.z);
         other.gameObject.GetComponent<Rigidbody2D>().velocity = V;
@@ -90,7 +90,7 @@ public class WallType : MonoBehaviour
     void NudgeY(Collision2D other, float y)
     {
         Transform T = other.transform;
-        T.position = new Vector3(T.position.x, 7.65f*y, T.position.z);
+        T.position = new Vector3(T.position.x, T.position.y + 7.65f*y, T.position.z);
         Vector3 V = other.gameObject.GetComponent<Rigidbody2D>().velocity;
         V = new Vector3(V.x, -V.y, V.z);
         other.gameObject.GetComponent<Rigidbody2D>().velocity = V;

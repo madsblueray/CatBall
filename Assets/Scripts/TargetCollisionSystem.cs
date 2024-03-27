@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -110,7 +109,7 @@ public class TargetCollisionSystem : MonoBehaviour
     public void Shrink(Collision2D other)
     {
         Vector2 size = gameObject.GetComponent<SpriteRenderer>().size;
-        transform.localPosition = NudgeWithAnchor(transform.localPosition, size*Mathf.Sign(shrinkAmt)*Mathf.Pow(Math.Abs(shrinkAmt),1.5f)/2.33f, anchorPoint);
+        transform.localPosition = NudgeWithAnchor(transform.localPosition, size*Mathf.Sign(shrinkAmt)*Mathf.Pow(Mathf.Abs(shrinkAmt),1.5f)/2.33f, anchorPoint);
         transform.localScale*=(1-shrinkAmt);
     }
 

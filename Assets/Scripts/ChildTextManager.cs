@@ -31,7 +31,11 @@ public class ChildTextManager : MonoBehaviour
     void Deploy()
     {
         EnableText(0);
-        DelayedEnable(1);
+        for (int i = 1; i < texts.Length; i++)
+        {
+            DelayedEnable(i);
+        }
+        
     }
 
     public void EnableText(int childIndex)
