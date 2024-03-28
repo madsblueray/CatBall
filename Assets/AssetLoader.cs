@@ -20,7 +20,7 @@ public class AssetLoader : MonoBehaviour
     //maybe just by component name
     List<Bootstrapped> objectsToLoad;
 
-    void Start()
+    void Awake()
     {
         InitializeBootstrappedComponents();
     }
@@ -32,8 +32,9 @@ public class AssetLoader : MonoBehaviour
         objectsToLoad.Sort(IBCSortComparer);
         foreach(Bootstrapped obj in objectsToLoad)
         {
+            Debug.Log(obj + " is initializing in rank: " + rank + " with priority: " + obj.Priority);
             obj.Initialize();
-            Debug.Log(((MonoBehaviour)obj).name + "has been initialized in rank: " + rank);
+            
             rank++;
         }
         

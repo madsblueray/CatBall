@@ -11,7 +11,8 @@ using UnityEngine.Rendering.Universal.Internal;
 
 public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
 {
-    public int priority = 0;
+    //after level properties
+    public int priority = 5;
     public int Priority
     {
         get {
@@ -44,15 +45,6 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
     public void StartGame()
     {
         LoadLevel(currentLevel);
-    }
-
-    void Start()
-    {
-        if (currentLevel == 0) currentLevel = startingLevel;
-        GenerateLevelsList();
-        Debug.Log("levels: " + levels);
-        levels[0].SetActive(true);
-        //LoadLevel(currentLevel);
     }
 
     public void Initialize()

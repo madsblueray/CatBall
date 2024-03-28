@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class BallCounter : MonoBehaviour, Bootstrapped
 {
+    //before launcher ready event is used
     public int priority = 0;
     public int Priority
     {
@@ -19,11 +20,6 @@ public class BallCounter : MonoBehaviour, Bootstrapped
     public BallLauncher launcher;
     public TMP_Text text;
     // Start is called before the first frame update
-    
-    void Start()
-    {
-        BallManager.LauncherReadyEvent += ChangeBalls;
-    }
 
     public void Initialize()
     {

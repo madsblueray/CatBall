@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class TriesCounter : MonoBehaviour, IDataPersistence, Bootstrapped
 {
-    public int priority = 0;
+    //after data has been loaded
+    public int priority = 1;
     public int Priority
     {
         get {
@@ -26,18 +27,6 @@ public class TriesCounter : MonoBehaviour, IDataPersistence, Bootstrapped
     public void SaveData(ref GameData data)
     {
         data.current_tries = curTries;
-    }
-    
-    void Awake()
-    {
-        BallLauncher.BallLaunchedStatic += LoseATry;
-        WinConditionManager.lossEvent += IncreaseCounterWobble;
-        WinConditionManager.outOfTriesEvent += Reset;
-        WinConditionManager.winEvent += Reset;
-        LevelLoader.OnLevelChange += EnableText;
-        LevelLoader.OnLevelChange += UpdateText;
-        text = gameObject.GetComponent<TMP_Text>();
-        InitializeTries(true);
     }
 
     public void Initialize()

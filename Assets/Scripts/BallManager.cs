@@ -6,15 +6,15 @@ using UnityEngine.WSA;
 
 public class BallManager : MonoBehaviour, Bootstrapped
 {
-    public int priority = 0;
+    public int priority = 1;
     public int Priority
     {
         get {
-            Debug.Log("BallManager priority: " + priority);
+            Debug.Log(name + " priority: " + priority);
             return priority;
         }
     }
-    
+
     [SerializeField]
     public int ballsDestroyed;
     public int ballsExpected;
@@ -25,28 +25,11 @@ public class BallManager : MonoBehaviour, Bootstrapped
     public delegate void LauncherReady(int levelIndex);
     public static event LauncherReady LauncherReadyEvent;
 
-    void Awake()
-    {
-        ball = GetComponentInChildren<BallLauncher>(true);
-        lp = GetComponentInParent<LevelProperties>();
-
-        LauncherReadyEvent.Invoke(lp.levelIndex);
-
-        ProjectileBall.ballDestroyedInLevel += Decrement;
-
-        LevelLoader.OnLevelChange += ResetBall;
-        LevelLoader.OnLevelChange += ResetBallCount;
-        LevelLoader.OnLevelChange += LauncherActive;
-        
-        ballsExpected = gameObject.GetComponentInChildren<BallLauncher>().ballCount;
-    }
-
     public void Initialize()
     {
         ball = GetComponentInChildren<BallLauncher>(true);
-        lp = GetComponentInParent<LevelProperties>();
-
-        LauncherReadyEvent.Invoke(lp.levelIndex);
+        lp = GetComponentInParent<LevelProperties>(true);
+        Debug.Log("Ball Manager initialized. LP is: " + lp);
 
         ProjectileBall.ballDestroyedInLevel += Decrement;
 

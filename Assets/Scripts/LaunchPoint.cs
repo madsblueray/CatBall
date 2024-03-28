@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaunchPoint : MonoBehaviour, Bootstrapped
+public class LaunchPoint : MonoBehaviour
 {
     public int priority = 0;
     public int Priority
@@ -17,11 +17,6 @@ public class LaunchPoint : MonoBehaviour, Bootstrapped
     public float myDelay = 0.15f;
 
     void Start()
-    {
-        transform.position = BL.transform.position;
-    }
-
-    public void Initialize()
     {
         transform.position = BL.transform.position;
     }

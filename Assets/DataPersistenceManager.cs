@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class DataPersistenceManager : MonoBehaviour, Bootstrapped
 {
-    public int priority = 0;
+    //after cats collected reader
+    public int priority = 1;
     public int Priority
     {
         get {
@@ -26,17 +27,17 @@ public class DataPersistenceManager : MonoBehaviour, Bootstrapped
 
     FileDataHandler dataHandler;
 
-    void Start()
-    {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
-    }
-
     public void Initialize()
     {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+
+        if (instance != null)
+        {
+            Debug.LogError("DPManager already exists");
+        }
+        instance = this;
+
         LoadGame();
     }
 
@@ -44,16 +45,6 @@ public class DataPersistenceManager : MonoBehaviour, Bootstrapped
     {
         Debug.Log("I QUIT!!!!!");
         SaveGame();
-    }
-
-
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.LogError("DPManager already exists");
-        }
-        instance = this;
     }
 
     public void NewGame()

@@ -6,14 +6,7 @@ public class WallLoader : MonoBehaviour
 {
     public static WallType[] walls;
     // Start is called before the first frame update
-    void Start()
-    {
-        walls = gameObject.GetComponentsInChildren<WallType>();
-        LevelLoader.OnLevelChange += LoadWalls;
-        LevelLoader.OnLevelChange += MoveWalls;
-    }
-
-    public void Initialize()
+    void Awake()
     {
         walls = gameObject.GetComponentsInChildren<WallType>();
         LevelLoader.OnLevelChange += LoadWalls;

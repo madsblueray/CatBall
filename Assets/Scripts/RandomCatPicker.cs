@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class RandomCatPicker : MonoBehaviour, Bootstrapped
 {
-    public int priority = 0;
+    //probably after most of the gallery stuff
+    //need to update functionality to make the list cats that have been discovered
+    public int priority = 3;
     public int Priority
     {
         get {
@@ -14,11 +16,6 @@ public class RandomCatPicker : MonoBehaviour, Bootstrapped
         }
     }
     public Sprite[] cats;
-
-    void Start()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = cats[Random.Range(0, cats.Length)];
-    }
 
     public void Initialize()
     {

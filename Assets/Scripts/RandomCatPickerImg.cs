@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class RandomCatPickerImg : MonoBehaviour, Bootstrapped
 {
-    public int priority = 0;
+    //after random cat picker
+    public int priority = 4;
     public int Priority
     {
         get {

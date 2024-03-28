@@ -5,36 +5,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CatsCollectedReader : MonoBehaviour, IDataPersistence
+public class CatsCollectedReader : MonoBehaviour, IDataPersistence, Bootstrapped
 {
+    
+    //pretty early on
+    //before data persistence
+    public int priority = 0;
+    public int Priority
+    {
+        get {
+            Debug.Log(name + " priority: " + priority);
+            return priority;
+        }
+    }
     public GameObject galleryContent;
     Dictionary<int, GameObject> gallery;
     int cats_discovered;
     int hidden_cats_teased = 5;
-    List<int> gallery_collected;
-
-    
-
-    void Start()
-    {
-        LevelLoader.OnLevelChange += AdjustColorHiddenGalleryObjects;
-
-        gallery = new Dictionary<int, GameObject>();
-        gallery_collected = new List<int>();
-        foreach (Transform t in galleryContent.transform)
-        {
-            gallery.Add(t.GetComponent<GalleryObject>().ID, t.gameObject);
-        }
-
-        AdjustColorHiddenGalleryObjects();
-    }
+    HashSet<int> gallery_collected;
 
     public void Initialize()
     {
         LevelLoader.OnLevelChange += AdjustColorHiddenGalleryObjects;
 
         gallery = new Dictionary<int, GameObject>();
-        gallery_collected = new List<int>();
+        gallery_collected = new HashSet<int>();
         foreach (Transform t in galleryContent.transform)
         {
             gallery.Add(t.GetComponent<GalleryObject>().ID, t.gameObject);
@@ -51,21 +46,23 @@ public class CatsCollectedReader : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         cats_discovered = data.cats_discovered;
-        for (int i = 0; i < cats_discovered; i++)
+        for (int i = 0; i < cats_discovered-1; i++)
         {
             Debug.Log("i: " + i + ", cats discovered: " + cats_discovered);
-            DiscoverCat(i+1);
+            DiscoverCat(i+1, false);
         }
     }
 
-    public bool DiscoverCat(int cat_id)
+    public bool DiscoverCat(int cat_id, bool increment = true)
     {
         try
         {
             Debug.Log("Cattributes: " + cat_id);
+            if (gallery_collected.Contains(cat_id)) throw new ArgumentException();
             gallery_collected.Add(cat_id);
+            Debug.Log(gallery_collected.Count);
             Reveal(gallery[cat_id], cat_id);
-            cats_discovered++;
+            if (increment) cats_discovered++;
             return true;
         }
 

@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class LevelProperties : MonoBehaviour, Bootstrapped
 {
+    //before level loader
     public int priority = 0;
     public int Priority
     {
@@ -19,14 +20,6 @@ public class LevelProperties : MonoBehaviour, Bootstrapped
 
     [Header("Wall order: Ceiling, Floor, Left, Right")]
     public int[] wallTypes;
-    void Start()
-    {
-        String num = gameObject.name[5..];
-        Debug.Log(gameObject.name);
-        Debug.Log(num);
-        levelIndex = int.Parse(num);
-        Debug.Log(levelIndex);
-    }
 
     public void Initialize()
     {

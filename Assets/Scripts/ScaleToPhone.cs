@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ScaleToPhone : MonoBehaviour, Bootstrapped
 {
-    public int priority = 0;
+    //this can probably go first
+    //no troubling dependencies but this changes visual, otherwise would not be bootstrapped
+    public int priority = -1;
     public int Priority
     {
         get {

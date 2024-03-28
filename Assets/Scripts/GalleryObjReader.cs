@@ -3,28 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GalleryObjReader : MonoBehaviour, Bootstrapped
+public class GalleryObjReader : MonoBehaviour
 {
-    public int priority = 0;
-    public int Priority
-    {
-        get {
-            Debug.Log(name + " priority: " + priority);
-            return priority;
-        }
-    }
     public TMP_Text Name;
     public TMP_Text Attributes;
     public TMP_Text Desc;
 
     public SpriteRenderer SR;
 
-    void Start()
-    {
-        GalleryObject.galleryObjectClicked += LoadReader;
-    }
-
-    public void Initialize()
+    void Awake()
     {
         GalleryObject.galleryObjectClicked += LoadReader;
     }

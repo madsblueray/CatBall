@@ -8,7 +8,8 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour, IDataPersistence, Bootstrapped
 {
-    public int priority = 0;
+    //after sfx toggle companion
+    public int priority = 2;
     public int Priority
     {
         get {
@@ -24,24 +25,21 @@ public class SoundManager : MonoBehaviour, IDataPersistence, Bootstrapped
 
     float mute_vol = -79.9f;
 
-    void Start()
-    {
-        SfxToggleCompanion.SFXToggleUpdate += ToggleMute;
-        ToggleMute(true, mute_sfx);
-        ToggleMute(false, mute_music);
-    }
-
     public void Initialize()
     {
         SfxToggleCompanion.SFXToggleUpdate += ToggleMute;
         ToggleMute(true, mute_sfx);
         ToggleMute(false, mute_music);
 
-        LoadSoundDataSyncUI?.Invoke();
+        LoadSoundDataSyncUI.Invoke();
     }
-    void Awake()
+
+    public void Start()
     {
-        LoadSoundDataSyncUI?.Invoke();
+        mixer.SetFloat("SFX_vol", mute_sfx?mute_vol:0.255f);
+        Debug.Log(mute_sfx + " for mute_sfx");
+        Debug.Log(mute_music + " for mute_music");
+        mixer.SetFloat("MSX_vol", mute_music?mute_vol:0.255f);
     }
 
     public void LoadData(GameData data)
@@ -61,12 +59,12 @@ public class SoundManager : MonoBehaviour, IDataPersistence, Bootstrapped
         if (true_for_sfx)
         {
             mixer.SetFloat("SFX_vol", value?mute_vol:0.255f);
-            Debug.Log((value?1:0) * mute_vol);
+            mute_sfx = value;
         }
         else
         {
             mixer.SetFloat("MSX_vol", value?mute_vol:0.255f);
-            Debug.Log((value?1:0) * mute_vol);
+            mute_music = value;
         }
     }
 }

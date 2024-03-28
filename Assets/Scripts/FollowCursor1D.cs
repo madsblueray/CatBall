@@ -3,23 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class FollowCursor1D : MonoBehaviour, Bootstrapped
+public class FollowCursor1D : MonoBehaviour
 {
-    public int priority = 0;
-    public int Priority
-    {
-        get {
-            Debug.Log(name + " priority: " + priority);
-            return priority;
-        }
-    }
 
-    void Awake()
-    {
-        Activate();
-    }
-
-    public void Initialize()
+    void Start()
     {
         Activate();
     }
