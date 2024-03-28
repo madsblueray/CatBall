@@ -11,16 +11,20 @@ public class GameData
     public int current_tries;
     public bool sfx_mute;
     public bool music_mute;
+    public bool shuffle;
     public int trackID;
+    public int effectIndex;
 
-    public GameData(int cd, int cl, int ct, bool sfx, bool msx, int tid)
+    public GameData(int cd, int cl, int ct, bool sfx, bool msx, bool shuf, int tid, int eid)
     {
         cats_discovered = cd;
         current_level = cl;
         current_tries = ct;
         sfx_mute = sfx;
         music_mute = msx;
+        shuffle = shuf;
         trackID = tid;
+        effectIndex = eid;
     }
 
     public GameData()

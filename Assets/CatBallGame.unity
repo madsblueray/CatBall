@@ -921,7 +921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 139118624}
   - component: {fileID: 139118626}
-  - component: {fileID: 139118625}
+  - component: {fileID: 139118627}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -950,21 +950,6 @@ RectTransform:
   m_AnchoredPosition: {x: 114.4, y: -0.9}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &139118625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139118623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce14eb37a431a40a2a9531e983744851, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priority: 1
-  toggle: {fileID: 139118626}
-  is_sfx: 1
 --- !u!114 &139118626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,8 +997,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 139118625}
-        m_TargetAssemblyTypeName: SfxToggleCompanion, Assembly-CSharp
+      - m_Target: {fileID: 139118627}
+        m_TargetAssemblyTypeName: ShuffleToggleCompanion, Assembly-CSharp
         m_MethodName: Toggled
         m_Mode: 1
         m_Arguments:
@@ -1025,6 +1010,20 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &139118627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139118623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d866bf6b19484156ba60accea10b11a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: 139118626}
+  musicManager: {fileID: 1113803473}
 --- !u!1 &161194647
 GameObject:
   m_ObjectHideFlags: 0
@@ -4997,7 +4996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 1
   fileName: data.txt
-  ResetDataDebug: 1
+  ResetDataDebug: 0
 --- !u!4 &996013802
 Transform:
   m_ObjectHideFlags: 0
@@ -5499,6 +5498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mute: 0
+  shuffle: 0
   current_trackID: 1
   current_effect_index: 0
   Audio: {fileID: 1113803474}

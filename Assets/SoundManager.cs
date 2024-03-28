@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour, IDataPersistence, Bootstrapped
     public delegate void SyncToggleUI();
     public static event SyncToggleUI LoadSoundDataSyncUI;
     public AudioMixer mixer;
+
     public static bool mute_sfx;
     public static bool mute_music;
 

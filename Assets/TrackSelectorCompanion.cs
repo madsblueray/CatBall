@@ -16,6 +16,7 @@ public class TrackSelectorCompanion : MonoBehaviour
 
     void Start()
     {
+        MusicManager.TrackChanged += UpdateText;
         UpdateText();
     }
 
