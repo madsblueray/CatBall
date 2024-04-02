@@ -38,5 +38,7 @@ public enum Menus{
     Main = 0,
     Settings = 1,
 
-    Gallery = 2
+    Gallery = 2,
+
+    More = 3
 }

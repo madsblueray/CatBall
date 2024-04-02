@@ -12,11 +12,11 @@ public class TrackSelectorCompanion : MonoBehaviour
     void Awake()
     {
         text = GetComponent<TMP_Text>();
+        MusicManager.TrackChanged += UpdateText;
     }
 
     void Start()
     {
-        MusicManager.TrackChanged += UpdateText;
         UpdateText();
     }
 

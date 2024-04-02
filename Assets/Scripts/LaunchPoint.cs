@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class LaunchPoint : MonoBehaviour
@@ -36,7 +37,16 @@ public class LaunchPoint : MonoBehaviour
                 var Copy = Instantiate(ball, transform.position, transform.rotation);
                 Copy.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
                 Copy.GetComponent<Rigidbody2D>().velocity = launchVector*.75f;
-                //Copy.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.9f, 1f, 1f, 1f);
+
+                //search for the target event handler
+                //for every gravity source add this ball to the attractable bodies
+                
+                GravitationalBody[] gravBodies = LevelLoader.levels[LevelLoader.currentLevel].GetComponentsInChildren<GravitationalBody>();
+                foreach(GravitationalBody gravBody in gravBodies)
+                {
+                    gravBody.AddToGravityList(Copy.GetComponent<Rigidbody2D>());
+                }
+
                 yield return new WaitForSeconds(myDelay);
             }
         }

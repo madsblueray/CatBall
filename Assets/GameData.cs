@@ -14,6 +14,7 @@ public class GameData
     public bool shuffle;
     public int trackID;
     public int effectIndex;
+    public bool adsTurnedOff;
 
     public GameData(int cd, int cl, int ct, bool sfx, bool msx, bool shuf, int tid, int eid)
     {
@@ -35,6 +36,8 @@ public class GameData
         sfx_mute = false;
         music_mute = false;
         trackID = 001;
+        effectIndex = 0;
+        adsTurnedOff = false;
     }
 
     public void OutOfBoundsFixer()

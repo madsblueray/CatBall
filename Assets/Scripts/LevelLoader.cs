@@ -16,7 +16,6 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
     public int Priority
     {
         get {
-            Debug.Log(name + " priority: " + priority);
             return priority;
         }
     }
@@ -44,6 +43,7 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
     
     public void StartGame()
     {
+        Debug.Log("Starting Game, current level = " + currentLevel);
         LoadLevel(currentLevel);
     }
 
@@ -51,7 +51,6 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
     {
         if (currentLevel == 0) currentLevel = startingLevel;
         GenerateLevelsList();
-        Debug.Log("levels: " + levels);
         levels[0].SetActive(true);
         //LoadLevel(currentLevel);
     }

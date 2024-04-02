@@ -95,6 +95,7 @@ public class MusicManager : MonoBehaviour, IDataPersistence
         }
         else
         {
+            Debug.Log("Tried to Change Tracks");
             ChangeTracks(current_trackID);
         }
     }

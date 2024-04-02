@@ -16,8 +16,8 @@ public class TargetCollisionSystem : MonoBehaviour
     public TMP_Text text;
     public int anchorPoint = 4;
     private readonly Vector2[,] anchorPoints = new Vector2[3,3];
-
     bool popped = false;
+    GravitationalBody gravBody;
     
     
 
@@ -29,6 +29,7 @@ public class TargetCollisionSystem : MonoBehaviour
     public bool shrinkOnHit;
     public bool rotateOnHit;
     public bool pushOnHit;
+    public bool gravitySource;
     public bool stopBallVelocityOnHit;
     public bool shrinkBallOnHit;
     public bool changeBallColorOnHit;
@@ -45,7 +46,14 @@ public class TargetCollisionSystem : MonoBehaviour
     {
         curHP = HP;
         InitializeAnchorPoints();
-        
+    }
+
+    void Start()
+    {
+        if (gravitySource)
+        {
+            gravBody = GetComponent<GravitationalBody>();
+        }
     }
     void Update()
     {

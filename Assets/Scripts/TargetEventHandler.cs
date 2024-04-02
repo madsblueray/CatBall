@@ -30,11 +30,11 @@ public class TargetEventHandler : MonoBehaviour
             SpawnPoints[i].saveTransform(Targets[i].transform);
         }
         WinConditionManager.lossEvent += RespawnTargets;
+        LevelLoader.OnLevelChange += RespawnTargets;
     }
     
     void handleTarget(int index)
     {
-        Debug.Log("TargetDeactivated");
         SpawnParticlesAtTarget(index);
         if (CCR.DiscoverCat(Targets[index].GetComponent<Cattributes>().ID))
         {
@@ -54,14 +54,15 @@ public class TargetEventHandler : MonoBehaviour
 
     void SpawnMessageAtTarget(int index)
     {
-        Debug.Log("tried to spawn the thingy");
         Instantiate(discoveredMessage, Targets[index].transform.position, new Quaternion(0,0,0,0));
     }
 
     void RespawnTargets()
     {
+        Debug.Log("Respawning targets in Level " + LevelLoader.currentLevel + "...");
         for( int i = 0 ; i < Targets.Length ; ++i )
         {
+            Debug.Log("Respawning target " + i + "in level " + LevelLoader.currentLevel);
             SpawnPoints[i].setTransform(Targets[i].transform);
             Targets[i].SetActive(true);
             Targets[i].GetComponent<TargetCollisionSystem>().ResetHP();
@@ -69,11 +70,18 @@ public class TargetEventHandler : MonoBehaviour
         destroyed = 0;
     } 
 
+    void RespawnTargets(int levelIndex)
+    {
+        if (GetComponentInParent<LevelProperties>(true).levelIndex == LevelLoader.currentLevel)
+        {
+            RespawnTargets();
+        } 
+    } 
+
     void checkForWin()
     {
         if (destroyed == Targets.Length)
         {
-            Debug.Log("destroyed: " + destroyed + ", length: " +Targets.Length);
             allTargetsDisabled.Invoke();
         }
     }
