@@ -46,7 +46,7 @@ public class CatsCollectedReader : MonoBehaviour, IDataPersistence, Bootstrapped
     public void LoadData(GameData data)
     {
         cats_discovered = data.cats_discovered;
-        for (int i = 0; i < cats_discovered-1; i++)
+        for (int i = 0; i < cats_discovered; i++)
         {
             Debug.Log("i: " + i + ", cats discovered: " + cats_discovered);
             DiscoverCat(i+1, false);
@@ -97,7 +97,7 @@ public class CatsCollectedReader : MonoBehaviour, IDataPersistence, Bootstrapped
         {
             Image img = gallery_obj.Value.GetComponentInChildren<Image>(true);
             int diff = gallery_obj.Key - cats_discovered;
-            if (diff > hidden_cats_teased) diff = 0;
+            if (diff > hidden_cats_teased) diff = 5;
             else diff--;
             Color c = new Color(0,0,0, (hidden_cats_teased-diff)*1f/hidden_cats_teased);
             img.color = c;

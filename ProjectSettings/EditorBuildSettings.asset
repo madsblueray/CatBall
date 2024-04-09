@@ -12,5 +12,7 @@ EditorBuildSettings:
     path: Assets/CatBallGame.unity
     guid: 6012cb577605a5f43994b5f5fdf63ccd
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: e5d27a69028f84006aa5f3969cb213ea, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: aba5f8f3c71919b48909d88f98712675, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: cb5f11e0f7cd14aeab156371f69b65a1, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 988eccd6f5757604bac0fb096213ca9a, type: 2}

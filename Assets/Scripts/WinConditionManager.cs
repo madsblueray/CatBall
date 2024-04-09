@@ -5,7 +5,6 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class WinConditionManager : MonoBehaviour, Bootstrapped
 {
