@@ -16,7 +16,9 @@ public class GameData
     public int effectIndex;
     public bool adsTurnedOff;
 
-    public GameData(int cd, int cl, int ct, bool sfx, bool msx, bool shuf, int tid, int eid)
+    public bool beatTheGame;
+
+    public GameData(int cd, int cl, int ct, bool sfx, bool msx, bool shuf, int tid, int eid, bool btg)
     {
         cats_discovered = cd;
         current_level = cl;
@@ -26,6 +28,7 @@ public class GameData
         shuffle = shuf;
         trackID = tid;
         effectIndex = eid;
+        beatTheGame = btg;
     }
 
     public GameData()
@@ -38,6 +41,7 @@ public class GameData
         trackID = 001;
         effectIndex = 0;
         adsTurnedOff = false;
+        beatTheGame = false;
     }
 
     public void OutOfBoundsFixer()

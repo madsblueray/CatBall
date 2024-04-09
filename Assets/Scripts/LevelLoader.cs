@@ -24,8 +24,13 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
     
     public delegate void ConfigureToLevel(int level);
     public static event ConfigureToLevel OnLevelChange;
+
+    public delegate void BeatTheGame();
+    public static event BeatTheGame beatTheGameEvent;
     public static List<GameObject> levels;
     public static int currentLevel;
+
+    public static bool beatTheGame;
     [SerializeField] public int curLevDebug;
     public int startingLevel;
     public GameObject WinUI;
@@ -34,11 +39,13 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
     public void LoadData(GameData data)
     {
         currentLevel = data.current_level;
+        beatTheGame = data.beatTheGame;
     }
 
     public void SaveData(ref GameData data)
     {
         data.current_level = currentLevel;
+        data.beatTheGame = beatTheGame;
     }
     
     public void StartGame()
@@ -59,6 +66,15 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
     {
         //broadcast that it's time to set up a level back to square 1
         //hook up UI to that level's components
+        Debug.Log("trying to load level of index " + levelIndex);
+        if (levelIndex > 51)
+        {
+            levelIndex -= 51;
+            beatTheGame = true;
+            beatTheGameEvent.Invoke();
+        }
+        Debug.Log("After adjustment, the new index is " + levelIndex);
+
         OnLevelChange.Invoke(levelIndex);
         levels[currentLevel].SetActive(false);
 

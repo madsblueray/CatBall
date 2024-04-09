@@ -7,9 +7,11 @@ using UnityEngine.Rendering.Universal;
 public class WallLightHandler : MonoBehaviour
 {
     Light2D[] lights;
+
+    //in mobile version the lights are switched off for now
     void Awake()
     {
-        lights = gameObject.GetComponentsInChildren<Light2D>();
+        lights = gameObject.GetComponentsInChildren<Light2D>(true);
         BallLauncher.BallLaunchedStatic += LightsOff;
         LevelLoader.OnLevelChange += LightsOn;
     }

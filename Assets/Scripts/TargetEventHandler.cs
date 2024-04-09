@@ -36,7 +36,7 @@ public class TargetEventHandler : MonoBehaviour
     void handleTarget(int index)
     {
         SpawnParticlesAtTarget(index);
-        if (CCR.DiscoverCat(Targets[index].GetComponent<Cattributes>().ID))
+        if (CCR.DiscoverCat(Targets[index].GetComponent<Cattributes>().ID, true))
         {
             SpawnMessageAtTarget(index);
         }

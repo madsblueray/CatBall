@@ -38,12 +38,19 @@ public class DataPersistenceManager : MonoBehaviour, Bootstrapped
         }
         instance = this;
 
+        WinConditionManager.lossEvent += SaveGame;
+        WinConditionManager.winEvent += SaveGame;
+
         LoadGame();
     }
 
     private void OnApplicationQuit()
     {
-        Debug.Log("I QUIT!!!!!");
+        SaveGame();
+    }
+
+    private void OnApplicationPause()
+    {
         SaveGame();
     }
 

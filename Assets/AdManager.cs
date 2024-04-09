@@ -132,5 +132,8 @@ public class AdManager : MonoBehaviour, IDataPersistence, IUnityAdsLoadListener,
     public void OnUnityAdsShowClick(string _adUnitId) { }
     public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) { }
 
-
+    public void DisableAds()
+    {
+        adsTurnedOff = true;
+    }
 }

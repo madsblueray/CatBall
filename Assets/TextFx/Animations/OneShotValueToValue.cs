@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -19,6 +21,8 @@ public class OneShotValueToValue : MonoBehaviour
     public bool[] invert;
     public TWVS[] var;
 
+    TMP_Text text;
+
     Action<float>[] func;
     float t = 0f;
     bool setupComplete = false;
@@ -28,6 +32,8 @@ public class OneShotValueToValue : MonoBehaviour
     float Y;
     float Amp;
 
+    bool nudged = false;
+
 
     void OnEnable()
     {
@@ -35,12 +41,18 @@ public class OneShotValueToValue : MonoBehaviour
         func = new Action<float>[var.Length];
         TW = gameObject.GetComponent<TextWobbler>();
         AnimationSetup();
+        text = GetComponent<TMP_Text>();
     }
 
     void Update()
     {
         if(setupComplete)
         {
+            if (!nudged) 
+            {
+                text.alpha = 1;
+                nudged = true;
+            }
             for (int i = 0; i < varSize; i++)
             {
                 if (invert[i])

@@ -26,8 +26,12 @@ public class WallType : MonoBehaviour
 
     public void RefreshColors()
     {
-        light_ = GetComponentInChildren<Light2D>();
-        light_.color = colors[type];
+        if (light_ != null)
+        {
+            light_ = GetComponentInChildren<Light2D>();
+            light_.color = colors[type];
+        }
+        
 
         line_ = GetComponentInChildren<LineRenderer>();
         line_.colorGradient = gradients[type];

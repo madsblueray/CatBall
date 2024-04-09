@@ -20,7 +20,7 @@ public class CatsCollectedReader : MonoBehaviour, IDataPersistence, Bootstrapped
     }
     public GameObject galleryContent;
     Dictionary<int, GameObject> gallery;
-    int cats_discovered;
+    public int cats_discovered;
     int hidden_cats_teased = 5;
     HashSet<int> gallery_collected;
 
@@ -46,7 +46,7 @@ public class CatsCollectedReader : MonoBehaviour, IDataPersistence, Bootstrapped
     public void LoadData(GameData data)
     {
         cats_discovered = data.cats_discovered;
-        for (int i = 0; i < cats_discovered-1; i++)
+        for (int i = 0; i < cats_discovered; i++)
         {
             Debug.Log("i: " + i + ", cats discovered: " + cats_discovered);
             DiscoverCat(i+1, false);
@@ -62,7 +62,12 @@ public class CatsCollectedReader : MonoBehaviour, IDataPersistence, Bootstrapped
             gallery_collected.Add(cat_id);
             Debug.Log(gallery_collected.Count);
             Reveal(gallery[cat_id], cat_id);
-            if (increment) cats_discovered++;
+            Debug.Log("increment value when discoverCat was called " + increment);
+            if (increment) 
+            {
+                cats_discovered = cats_discovered + 1;
+            }
+            AdjustColorHiddenGalleryObjects();
             return true;
         }
 
@@ -91,17 +96,21 @@ public class CatsCollectedReader : MonoBehaviour, IDataPersistence, Bootstrapped
     //silhouette 
     public void AdjustColorHiddenGalleryObjects()
     {
-        IEnumerable<KeyValuePair<int, GameObject>> query = gallery.TakeWhile(obj => obj.Key > cats_discovered);
-
-        foreach(KeyValuePair<int, GameObject> gallery_obj in query)
+        foreach(KeyValuePair<int, GameObject> gallery_obj in gallery)
         {
-            Image img = gallery_obj.Value.GetComponentInChildren<Image>(true);
-            int diff = gallery_obj.Key - cats_discovered;
-            if (diff > hidden_cats_teased) diff = 0;
-            else diff--;
-            Color c = new Color(0,0,0, (hidden_cats_teased-diff)*1f/hidden_cats_teased);
-            img.color = c;
-            Debug.Log("Cat " + gallery_obj.Key + " given color " + c);
+            if (gallery_obj.Key > cats_discovered)
+            {
+                Debug.Log(gallery_obj + " was read when adjusting colors");
+                Image img = gallery_obj.Value.GetComponentInChildren<Image>(true);
+                int diff = gallery_obj.Key - cats_discovered;
+                Debug.Log(cats_discovered + " cats discovered");
+                if (diff > hidden_cats_teased) diff = 5;
+                else diff--;
+                Color c = new Color(0,0,0, (hidden_cats_teased-diff)*1f/hidden_cats_teased);
+                img.color = c;
+                Debug.Log("Cat " + gallery_obj.Key + " given color " + c);
+            }
+            
         }
     }
 

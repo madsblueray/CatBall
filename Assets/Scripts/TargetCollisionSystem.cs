@@ -83,6 +83,7 @@ public class TargetCollisionSystem : MonoBehaviour
         if (shrinkOnHit) Shrink(other);
         if (rotateOnHit) Rotate(other);
         if (pushOnHit)   Push(other);
+        if (stopBallVelocityOnHit) StopVelocity(other);
     }
 
     void InitializeAnchorPoints()
@@ -130,6 +131,11 @@ public class TargetCollisionSystem : MonoBehaviour
     {
         Vector2 dir = other.relativeVelocity;
         other.otherCollider.gameObject.transform.localPosition += new Vector3(dir.x, dir.y, 0)*pushAmt;
+    }
+
+    public void StopVelocity(Collision2D other)
+    {
+        other.rigidbody.velocity /= 100;
     }
 
     public void ResetHP()

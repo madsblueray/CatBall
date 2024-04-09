@@ -52,5 +52,5 @@
         "Temp/": true
     },
     "dotnet.preferCSharpExtension": true,
-    "dotnet.defaultSolution": "mobile_game_1.sln"
+    "dotnet.defaultSolution": "catball.sln"
 }

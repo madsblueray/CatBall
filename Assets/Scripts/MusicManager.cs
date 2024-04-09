@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour, IDataPersistence
@@ -67,7 +66,7 @@ public class MusicManager : MonoBehaviour, IDataPersistence
         {
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         //set the bgm track to be played and play it
         effects[current_effect_index].ApplyEffect(Audio);
         Audio.clip = tracks[current_trackID-1].audio;
@@ -109,7 +108,7 @@ public class MusicManager : MonoBehaviour, IDataPersistence
         Audio.volume = 0.6f;
         current_trackID = trackID;
         coroutine_reference = PlayTrack();
-        TrackChanged.Invoke();
+        TrackChanged?.Invoke();
         StartCoroutine(coroutine_reference);
     }
 
