@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using UnityEngine.UI;
 
 public class AdButtonBuddy : MonoBehaviour
 {
     TMP_Text text;
-    CodelessIAPButton button;
+    CodelessIAPButton ad_button;
+    Button button;
 
     void Start()
     {
         text = GetComponent<TMP_Text>();
-        button = GetComponent<CodelessIAPButton>();
+        ad_button = GetComponent<CodelessIAPButton>();
+        button = GetComponent<Button>();
     }
 
     void Update()
@@ -21,6 +24,7 @@ public class AdButtonBuddy : MonoBehaviour
         {
             text.text = "ADS HAVE BEEN DISABLED!";
             button.enabled = false;
+            ad_button.enabled = false;
         }
     }
 }

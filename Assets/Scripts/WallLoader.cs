@@ -58,9 +58,6 @@ public class WallLoader : MonoBehaviour
 
     void MoveWalls(int index)
     {
-        Debug.Log("HEllo?");
-        Debug.Log(index);
-        Debug.Log(30*index);
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(30*(index), pos.y, pos.z);
     }

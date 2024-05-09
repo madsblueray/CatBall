@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -134,6 +135,12 @@ public class AdManager : MonoBehaviour, IDataPersistence, IUnityAdsLoadListener,
 
     public void DisableAds()
     {
+        StartCoroutine(DisableAdsCR());
+    }
+
+    IEnumerator DisableAdsCR()
+    {
+        yield return new WaitForSeconds(1);
         adsTurnedOff = true;
     }
 }

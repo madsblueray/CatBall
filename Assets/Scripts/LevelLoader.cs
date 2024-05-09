@@ -73,6 +73,10 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
             beatTheGame = true;
             beatTheGameEvent.Invoke();
         }
+        if (levelIndex < 1)
+        {
+            levelIndex = 1;
+        }
         Debug.Log("After adjustment, the new index is " + levelIndex);
 
         OnLevelChange.Invoke(levelIndex);
@@ -95,13 +99,16 @@ public class LevelLoader : MonoBehaviour, IDataPersistence, Bootstrapped
         levels[currentLevel].SetActive(false);
         if (win)
         {
+            OnLevelChange.Invoke(currentLevel+1);
             currentLevel++;
         }
         else
         {
+            OnLevelChange.Invoke(currentLevel-1);
             currentLevel--;
         }
         levels[0].SetActive(true);
+        
     }
 
     public void NextLevel()
